@@ -87,7 +87,21 @@ mkdir -p "$HOME/.secrets"
 touch "$HOME/.secrets/env"
 chmod 600 "$HOME/.secrets/env"
 
-# ── 8. Install agency-agents ─────────────────────────────────────────────────
+# ── 8. Claude for Legal plugins ─────────────────────────────────────────────
+install_legal_plugin() {
+  local plugin="$1"
+  claude plugin list 2>/dev/null | grep -q "$plugin" && return 0
+  claude plugin marketplace add anthropics/claude-for-legal 2>/dev/null || true
+  claude plugin install "${plugin}@claude-for-legal" 2>/dev/null || true
+}
+for p in commercial-legal corporate-legal privacy-legal product-legal \
+          employment-legal ip-legal ai-governance-legal litigation-legal \
+          regulatory-legal; do
+  install_legal_plugin "$p"
+done
+echo "Legal plugins ready"
+
+# ── 9. Install agency-agents ─────────────────────────────────────────────────
 chmod +x "$REPO_DIR/scripts/"*.sh
 cd "$REPO_DIR"
 ./scripts/install.sh --tool claude-code --no-interactive
