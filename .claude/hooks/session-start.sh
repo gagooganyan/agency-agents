@@ -57,6 +57,9 @@ register_mcp() {
 
 register_mcp pdf-reader    -- python "$HOME/.claude/mcp-servers/pdf_reader.py"
 register_mcp playwright    -- npx @playwright/mcp@latest
+register_mcp n8n-mcp \
+  -e MCP_MODE=stdio -e LOG_LEVEL=error -e DISABLE_CONSOLE_OUTPUT=true \
+  -- npx n8n-mcp
 
 # Supabase needs SUPABASE_ACCESS_TOKEN from ~/.secrets/env
 if [ -f "$HOME/.secrets/env" ]; then
@@ -87,7 +90,14 @@ mkdir -p "$HOME/.secrets"
 touch "$HOME/.secrets/env"
 chmod 600 "$HOME/.secrets/env"
 
-# ── 8. Claude for Legal plugins ─────────────────────────────────────────────
+# ── 8. UI/UX Pro Max plugin ──────────────────────────────────────────────────
+claude plugin list 2>/dev/null | grep -q "ui-ux-pro-max" || {
+  claude plugin marketplace add nextlevelbuilder/ui-ux-pro-max-skill 2>/dev/null || true
+  claude plugin install ui-ux-pro-max@ui-ux-pro-max-skill 2>/dev/null || true
+  echo "UI/UX Pro Max installed"
+}
+
+# ── 9. Claude for Legal plugins ─────────────────────────────────────────────
 install_legal_plugin() {
   local plugin="$1"
   claude plugin list 2>/dev/null | grep -q "$plugin" && return 0
