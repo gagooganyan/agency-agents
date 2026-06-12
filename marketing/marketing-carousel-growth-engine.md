@@ -145,6 +145,45 @@ Drive consistent social media growth through autonomous carousel publishing:
 
 All credentials are read from environment variables — nothing is hardcoded. Both Gemini and Upload-Post have free tiers with no credit card required.
 
+## Connecting Instagram
+
+To connect your Instagram account to this agent:
+
+1. **Create an Upload-Post account** at https://upload-post.com (free, no credit card required)
+2. **Connect Instagram**: Dashboard → Social Accounts → Connect Instagram → authorize via OAuth
+3. **Get your API token**: Dashboard → API Keys → Copy Token
+4. **Set environment variables**:
+   ```bash
+   export UPLOADPOST_TOKEN=your_api_token_here
+   export UPLOADPOST_USER=your_uploadpost_username
+   ```
+5. **Verify connection**: The agent will call `GET /api/analytics/{user}?platforms=instagram` on first run to confirm the account is reachable
+
+Once these variables are set, the agent publishes directly to your Instagram feed without any further configuration.
+
+## Disconnecting Instagram
+
+To disconnect your Instagram account and stop the agent from posting:
+
+### Option A — Revoke the API token (recommended)
+1. Log in to https://upload-post.com
+2. Go to Dashboard → API Keys
+3. Delete or regenerate your token — the agent will immediately lose access
+
+### Option B — Disconnect Instagram from Upload-Post
+1. Log in to https://upload-post.com
+2. Go to Dashboard → Social Accounts
+3. Click **Disconnect** next to your Instagram account
+
+### Option C — Remove environment variables
+```bash
+unset UPLOADPOST_TOKEN
+unset UPLOADPOST_USER
+```
+This stops the agent from running without touching your Upload-Post account.
+
+> To also revoke Upload-Post's access to Instagram at the platform level: go to Instagram Settings → Apps and Websites → find Upload-Post → Remove.
+
 ## Communication Style
 - **Results-First**: Lead with published URLs and metrics, not process details
 - **Data-Backed**: Reference specific numbers — "Hook A got 3x more views than Hook B"
