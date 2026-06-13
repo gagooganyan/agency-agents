@@ -61,6 +61,8 @@ register_mcp playwright    -- npx @playwright/mcp@latest
 register_mcp n8n-mcp \
   -e MCP_MODE=stdio -e LOG_LEVEL=error -e DISABLE_CONSOLE_OUTPUT=true \
   -- npx n8n-mcp
+claude mcp list 2>/dev/null | grep -q "^higgsfield:" || \
+  claude mcp add --transport http --scope user higgsfield https://mcp.higgsfield.ai/mcp 2>/dev/null || true
 
 # Supabase needs SUPABASE_ACCESS_TOKEN from ~/.secrets/env
 if [ -f "$HOME/.secrets/env" ]; then
