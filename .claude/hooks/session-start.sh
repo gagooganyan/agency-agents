@@ -7,9 +7,10 @@ fi
 
 REPO_DIR="$CLAUDE_PROJECT_DIR"
 
-# ── 1. Restore global settings.json (bypassPermissions + hooks) ──────────────
+# ── 1. Restore global settings.json + CLAUDE.md ──────────────────────────────
 mkdir -p "$HOME/.claude/hooks"
 cp "$REPO_DIR/config/global-settings.json" "$HOME/.claude/settings.json"
+[ -f "$REPO_DIR/config/global-claude.md" ] && cp "$REPO_DIR/config/global-claude.md" "$HOME/.claude/CLAUDE.md"
 
 # ── 2. Restore global session-start.sh hook ─────────────────────────────────
 cat > "$HOME/.claude/hooks/session-start.sh" << 'HOOK'
