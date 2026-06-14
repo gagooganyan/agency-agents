@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Agency — AI Specialists</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">🎭</span>
+        <div>
+          <h1>The Agency</h1>
+          <p>AI Specialists Ready to Transform Your Workflow</p>
+        </div>
+      </div>
+      <div class="header-stats">
+        <span id="agent-count">—</span> agents
+      </div>
+    </div>
+  </header>
+
+  <div class="controls">
+    <div class="controls-inner">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 20 20" fill="none">
+          <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M13.5 13.5 17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <input
+          id="search"
+          type="search"
+          placeholder="Search agents…"
+          autocomplete="off"
+        />
+      </div>
+      <div class="filter-wrap">
+        <select id="category-filter">
+          <option value="">All categories</option>
+        </select>
+        <select id="photo-filter">
+          <option value="">All agents</option>
+          <option value="with-photo">With photo</option>
+          <option value="no-photo">Without photo</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <main class="main">
+    <div id="grid" class="grid"></div>
+    <div id="empty" class="empty hidden">
+      <span>🔍</span>
+      <p>No agents found. Try a different search.</p>
+    </div>
+  </main>
+
+  <!-- Agent detail modal -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-box">
+      <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+
+      <div class="modal-header">
+        <div class="modal-avatar" id="modal-avatar"></div>
+        <div class="modal-meta">
+          <span class="modal-category" id="modal-category"></span>
+          <h2 id="modal-name"></h2>
+          <p class="modal-vibe" id="modal-vibe"></p>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <p class="modal-description" id="modal-description"></p>
+
+        <div class="photo-section">
+          <h3>Agent Photo</h3>
+          <div class="photo-preview-wrap">
+            <div class="photo-preview" id="photo-preview">
+              <span id="photo-preview-emoji"></span>
+            </div>
+            <div class="photo-actions">
+              <label class="btn btn-primary" for="photo-upload">
+                <svg viewBox="0 0 20 20" fill="none" width="16" height="16">
+                  <path d="M10 3v10M6 7l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M3 16h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                Upload photo
+              </label>
+              <input
+                type="file"
+                id="photo-upload"
+                accept="image/*"
+                class="sr-only"
+              />
+              <button class="btn btn-ghost" id="photo-remove" style="display:none">Remove photo</button>
+            </div>
+          </div>
+          <p class="photo-hint">
+            Photos are saved locally in your browser. To permanently store them,
+            place image files in <code>website/photos/&lt;slug&gt;.jpg</code>
+            and regenerate <code>agents.json</code>.
+          </p>
+        </div>
+
+        <div class="tools-section" id="tools-section">
+          <h3>Tools</h3>
+          <div class="tools-list" id="tools-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
