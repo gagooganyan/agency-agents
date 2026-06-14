@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BEARLOGA — Бренд-бук</title>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Swanky+and+Moo+Moo&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange:  #E8491E;
+    --cream:   #F2E4C0;
+    --brown:   #2D0E06;
+    --green:   #3A4B1B;
+    --coal:    #1E1C1A;
+    --white:   #FFFFFF;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Golos Text', sans-serif;
+    background: var(--white);
+    color: var(--coal);
+    line-height: 1.6;
+  }
+
+  /* ─── COVER ─── */
+  .cover {
+    background: var(--orange);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover-bear {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    font-size: 320px;
+    opacity: 0.12;
+    line-height: 1;
+    color: var(--brown);
+    user-select: none;
+  }
+  .cover-title {
+    font-size: clamp(80px, 14vw, 200px);
+    font-weight: 900;
+    color: var(--cream);
+    letter-spacing: -4px;
+    line-height: 0.85;
+    text-transform: uppercase;
+    font-style: italic;
+  }
+  .cover-sub {
+    margin-top: 32px;
+    font-size: 18px;
+    color: var(--cream);
+    opacity: 0.7;
+    font-family: 'Swanky and Moo Moo', cursive;
+    font-size: 28px;
+  }
+  .cover-meta {
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--cream);
+    opacity: 0.5;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* ─── SECTIONS ─── */
+  .section {
+    padding: 100px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .section-full {
+    padding: 100px 80px;
+    width: 100%;
+  }
+
+  .section-label {
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--orange);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-size: clamp(40px, 6vw, 80px);
+    font-weight: 900;
+    line-height: 0.95;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    margin-bottom: 48px;
+    font-style: italic;
+  }
+
+  h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    margin-top: 48px;
+  }
+
+  p {
+    font-size: 16px;
+    max-width: 640px;
+    color: #444;
+    margin-bottom: 16px;
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    height: 2px;
+    background: var(--cream);
+    margin: 0;
+  }
+
+  /* ─── PHILOSOPHY ─── */
+  .philosophy {
+    background: var(--brown);
+    color: var(--cream);
+  }
+  .philosophy h2 { color: var(--cream); }
+  .philosophy p { color: rgba(242,228,192,0.75); max-width: 800px; }
+  .philosophy .section { max-width: 100%; }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-top: 64px;
+  }
+  .value-card {
+    background: rgba(255,255,255,0.05);
+    padding: 40px 32px;
+    border-top: 3px solid var(--orange);
+  }
+  .value-num {
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--orange);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .value-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+  .value-desc {
+    font-size: 14px;
+    color: rgba(242,228,192,0.6);
+    max-width: none;
+  }
+
+  /* ─── LOGO ─── */
+  .logo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 48px;
+  }
+  .logo-card {
+    padding: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 300px;
+  }
+  .logo-card-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: auto;
+  }
+  .logo-wordmark {
+    font-size: clamp(48px, 6vw, 90px);
+    font-weight: 900;
+    letter-spacing: -3px;
+    text-transform: uppercase;
+    font-style: italic;
+    line-height: 0.88;
+  }
+  .logo-card.orange { background: var(--orange); color: var(--cream); }
+  .logo-card.brown  { background: var(--brown);  color: var(--cream); }
+  .logo-card.green  { background: var(--green);  color: var(--cream); }
+  .logo-card.cream  { background: var(--cream);  color: var(--brown); }
+
+  /* ─── MASCOT ─── */
+  .mascot-section {
+    background: var(--cream);
+  }
+  .mascot-showcase {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    margin-top: 48px;
+  }
+  .mascot-bear {
+    font-size: 260px;
+    text-align: center;
+    line-height: 1;
+    filter: drop-shadow(0 8px 40px rgba(0,0,0,0.1));
+  }
+  .mascot-traits {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .trait {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .trait-icon {
+    font-size: 24px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  .trait-text strong {
+    display: block;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+  .trait-text span {
+    font-size: 14px;
+    color: #666;
+  }
+
+  /* ─── COLORS ─── */
+  .colors-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+    margin-top: 48px;
+  }
+  .color-swatch {
+    aspect-ratio: 1;
+    position: relative;
+  }
+  .color-info {
+    padding: 20px;
+    background: var(--white);
+    border: 1px solid #eee;
+  }
+  .color-name {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .color-sub {
+    font-size: 11px;
+    color: #888;
+    margin-bottom: 8px;
+  }
+  .color-hex {
+    font-size: 13px;
+    font-family: monospace;
+    font-weight: 600;
+    color: var(--coal);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .color-cmyk {
+    font-size: 10px;
+    color: #999;
+    font-family: monospace;
+  }
+
+  .c-orange { background: var(--orange); }
+  .c-cream  { background: var(--cream); border: 1px solid #e0d8b8; }
+  .c-brown  { background: var(--brown); }
+  .c-green  { background: var(--green); }
+  .c-coal   { background: var(--coal); }
+  .c-white  { background: var(--white); border: 1px solid #eee; }
+
+  /* ─── COMBOS ─── */
+  .combos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 64px;
+  }
+  .combo {
+    padding: 48px 40px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+  }
+  .combo-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+  .combo-word {
+    font-size: 36px;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-style: italic;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+  .combo-paw { font-size: 24px; }
+
+  /* ─── TYPOGRAPHY ─── */
+  .type-section { background: var(--white); }
+
+  .type-showcase {
+    margin-top: 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .type-row {
+    padding: 56px 64px;
+    border-top: 1px solid #eee;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .type-meta { }
+  .type-font-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--orange);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .type-usage {
+    font-size: 12px;
+    color: #999;
+  }
+  .type-sample-firenight {
+    font-size: clamp(36px, 5vw, 72px);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    line-height: 0.9;
+    font-style: italic;
+    color: var(--coal);
+    font-family: 'Golos Text', sans-serif;
+  }
+  .type-sample-golos {
+    font-size: 20px;
+    font-family: 'Golos Text', sans-serif;
+    line-height: 1.6;
+    color: var(--coal);
+    max-width: 600px;
+  }
+  .type-sample-swanky {
+    font-size: 40px;
+    font-family: 'Swanky and Moo Moo', cursive;
+    color: var(--coal);
+    line-height: 1.3;
+  }
+
+  .type-scale {
+    margin-top: 64px;
+    padding: 64px;
+    background: var(--cream);
+  }
+  .scale-row {
+    display: flex;
+    align-items: baseline;
+    gap: 32px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  .scale-label {
+    font-size: 11px;
+    color: #999;
+    width: 100px;
+    flex-shrink: 0;
+    font-family: monospace;
+  }
+
+  /* ─── ILLUSTRATIONS ─── */
+  .illus-section {
+    background: var(--green);
+    color: var(--cream);
+  }
+  .illus-section h2 { color: var(--cream); }
+  .illus-section p { color: rgba(242,228,192,0.7); }
+
+  .illus-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 48px;
+  }
+  .illus-card {
+    background: rgba(255,255,255,0.05);
+    padding: 48px 40px;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .illus-icon {
+    font-size: 64px;
+    margin-bottom: 24px;
+  }
+  .illus-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+  .illus-desc {
+    font-size: 13px;
+    color: rgba(242,228,192,0.6);
+    line-height: 1.5;
+    max-width: none;
+  }
+
+  /* ─── PAW ─── */
+  .paw-section {
+    background: var(--orange);
+  }
+  .paw-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    margin-top: 0;
+  }
+  .paw-content h2 {
+    color: var(--cream);
+  }
+  .paw-content p {
+    color: rgba(242,228,192,0.8);
+    max-width: 100%;
+  }
+  .paw-hero {
+    font-size: 240px;
+    text-align: center;
+    line-height: 1;
+    filter: drop-shadow(0 0 60px rgba(0,0,0,0.3));
+  }
+  .paw-variants {
+    display: flex;
+    gap: 32px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+  .paw-chip {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    border: 1px solid rgba(242,228,192,0.3);
+    border-radius: 4px;
+  }
+  .paw-chip-icon { font-size: 24px; }
+  .paw-chip-text { font-size: 13px; color: var(--cream); opacity: 0.8; }
+
+  /* ─── VOICE ─── */
+  .voice-section {
+    background: var(--cream);
+  }
+  .slogans-grid {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+  }
+  .slogan-card {
+    padding: 48px 40px;
+    border-left: 4px solid var(--orange);
+    background: var(--white);
+  }
+  .slogan-type {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+  .slogan-text {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--coal);
+  }
+  .slogan-accent {
+    font-family: 'Swanky and Moo Moo', cursive;
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--brown);
+  }
+
+  .voice-traits {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+    margin-top: 48px;
+  }
+  .voice-trait {
+    padding: 32px 24px;
+    background: var(--white);
+    text-align: center;
+  }
+  .voice-icon { font-size: 32px; margin-bottom: 12px; }
+  .voice-label { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .voice-desc { font-size: 12px; color: #888; line-height: 1.4; }
+
+  /* ─── APPLICATIONS ─── */
+  .apps-section { background: var(--white); }
+  .apps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 48px;
+  }
+  .app-card {
+    overflow: hidden;
+  }
+  .app-visual {
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .app-info {
+    padding: 28px;
+    background: var(--white);
+    border: 1px solid #eee;
+  }
+  .app-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .app-desc {
+    font-size: 13px;
+    color: #888;
+    line-height: 1.5;
+    max-width: none;
+  }
+
+  /* Pizza box mock */
+  .mock-pizza-box {
+    background: var(--orange);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 24px;
+    position: relative;
+  }
+  .mock-pizza-box .mock-logo {
+    font-size: 52px;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-style: italic;
+    color: var(--cream);
+    letter-spacing: -2px;
+    line-height: 0.88;
+  }
+  .mock-pizza-box .mock-paw {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 28px;
+    opacity: 0.8;
+  }
+  .mock-pizza-box .mock-bear {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 80px;
+    opacity: 0.6;
+  }
+
+  /* Bag mock */
+  .mock-bag {
+    background: #C9AB85;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .mock-bag .mock-logo { font-size: 42px; font-weight: 900; text-transform: uppercase; font-style: italic; color: white; letter-spacing: -2px; line-height: 0.88; }
+  .mock-bag .mock-illus { font-size: 72px; }
+  .mock-bag .mock-paw-top { position: absolute; top: 16px; right: 16px; font-size: 24px; }
+
+  /* T-shirt mock */
+  .mock-tshirt {
+    background: #f5f5f5;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .mock-tshirt .mock-logo { font-size: 48px; font-weight: 900; text-transform: uppercase; font-style: italic; color: var(--orange); letter-spacing: -2px; line-height: 0.88; text-align: center; }
+  .mock-tshirt .mock-illus { font-size: 64px; }
+  .mock-tshirt .mock-caption { font-family: 'Swanky and Moo Moo', cursive; font-size: 18px; color: var(--coal); text-align: center; }
+
+  /* Card mock */
+  .mock-card {
+    background: var(--orange);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 28px;
+    position: relative;
+  }
+  .mock-card .mock-logo { font-size: 36px; font-weight: 900; text-transform: uppercase; font-style: italic; color: var(--cream); letter-spacing: -1px; line-height: 0.88; }
+  .mock-card .mock-paw { position: absolute; top: 16px; right: 20px; font-size: 22px; }
+
+  /* Wrap mock */
+  .mock-wrap {
+    background: var(--white);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+  .wrap-pattern {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 8px;
+    padding: 12px;
+    opacity: 0.15;
+  }
+  .wrap-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-style: italic;
+    color: var(--coal);
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+  .wrap-item.bear { font-size: 28px; font-style: normal; }
+
+  /* Loyalty card */
+  .mock-loyalty {
+    background: var(--cream);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 24px;
+  }
+  .mock-loyalty .loyalty-title { font-size: 13px; font-family: 'Swanky and Moo Moo', cursive; color: var(--brown); text-align: center; }
+  .mock-loyalty .paw-stamps { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .mock-loyalty .paw-stamp { font-size: 28px; }
+  .mock-loyalty .empty-stamp { width: 36px; height: 36px; border: 2px solid #ccc; border-radius: 50%; }
+
+  /* Social mock */
+  .mock-social {
+    background: var(--brown);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 32px;
+    text-align: center;
+  }
+  .mock-social .social-illus { font-size: 64px; }
+  .mock-social .social-logo { font-size: 32px; font-weight: 900; text-transform: uppercase; font-style: italic; color: var(--cream); letter-spacing: -1px; }
+  .mock-social .social-caption { font-family: 'Swanky and Moo Moo', cursive; font-size: 20px; color: var(--cream); opacity: 0.8; }
+
+  /* ─── RULES ─── */
+  .rules-section { background: var(--coal); color: var(--cream); }
+  .rules-section h2 { color: var(--cream); }
+  .rules-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 48px;
+  }
+  .rules-card {
+    padding: 48px 40px;
+    background: rgba(255,255,255,0.04);
+  }
+  .rules-card.do { border-top: 3px solid #4CAF50; }
+  .rules-card.dont { border-top: 3px solid var(--orange); }
+  .rules-card-title {
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 28px;
+  }
+  .rules-card.do .rules-card-title { color: #4CAF50; }
+  .rules-card.dont .rules-card-title { color: var(--orange); }
+  .rule-item {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(242,228,192,0.75);
+  }
+  .rule-bullet { flex-shrink: 0; font-size: 16px; }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    background: var(--brown);
+    padding: 80px;
+    text-align: center;
+  }
+  .footer-logo {
+    font-size: 80px;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-style: italic;
+    color: var(--cream);
+    letter-spacing: -3px;
+    margin-bottom: 24px;
+    display: block;
+  }
+  .footer-sub {
+    font-family: 'Swanky and Moo Moo', cursive;
+    font-size: 28px;
+    color: var(--orange);
+    display: block;
+    margin-bottom: 16px;
+  }
+  .footer-meta {
+    font-size: 12px;
+    color: rgba(242,228,192,0.35);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  /* ─── NAV ─── */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(30,28,26,0.92);
+    backdrop-filter: blur(12px);
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-brand {
+    font-size: 18px;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-style: italic;
+    color: var(--cream);
+    letter-spacing: -1px;
+  }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 11px;
+    color: rgba(242,228,192,0.5);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--orange); }
+
+  .cover { padding-top: 120px; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1024px) {
+    .section, .section-full { padding: 64px 40px; }
+    .colors-grid { grid-template-columns: repeat(3, 1fr); }
+    .values-grid { grid-template-columns: repeat(2, 1fr); }
+    .voice-traits { grid-template-columns: repeat(3, 1fr); }
+    .nav { display: none; }
+  }
+  @media (max-width: 768px) {
+    .section, .section-full { padding: 48px 24px; }
+    .cover { padding: 80px 24px 48px; }
+    .logo-grid, .combos, .apps-grid, .rules-grid, .slogans-grid { grid-template-columns: 1fr; }
+    .colors-grid { grid-template-columns: repeat(2, 1fr); }
+    .values-grid, .voice-traits, .illus-grid { grid-template-columns: 1fr; }
+    .mascot-showcase, .paw-content { grid-template-columns: 1fr; }
+    .type-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <span class="nav-brand">Bearloga</span>
+  <ul class="nav-links">
+    <li><a href="#philosophy">Философия</a></li>
+    <li><a href="#logo">Логотип</a></li>
+    <li><a href="#colors">Цвета</a></li>
+    <li><a href="#type">Типографика</a></li>
+    <li><a href="#illus">Иллюстрации</a></li>
+    <li><a href="#voice">Голос</a></li>
+    <li><a href="#apps">Носители</a></li>
+  </ul>
+</nav>
+
+<!-- COVER -->
+<section class="cover" id="cover">
+  <div class="cover-bear">🐻</div>
+  <div class="cover-title">BEAR<br>LOGA</div>
+  <div class="cover-sub">Бренд-бук</div>
+  <div class="cover-meta">Версия 1.0 · 2025 · Кропоткин</div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy" id="philosophy">
+  <div class="section">
+    <div class="section-label">01 / О бренде и философии</div>
+    <h2>Подход<br>к айдентике</h2>
+    <p>Bearloga — дружелюбное гастро-пространство, где сочетаются сытная еда, душевная атмосфера и тёплая компания. Это место про посиделки, вкусные бургеры, лапшу, пиццу и коктейли — по-домашнему, но с характером.</p>
+    <p>Концепция строится на сочетании брутального шрифта и контурных, «ручных» иллюстраций, как будто нарисованных на стене или салфетке за ужином. В графике появляются медвежьи следы — отсылки к имени и образу «берлоги».</p>
+
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-num">01</div>
+        <div class="value-title">Тепло</div>
+        <p class="value-desc">Каждый гость чувствует себя как дома</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">02</div>
+        <div class="value-title">Честность</div>
+        <p class="value-desc">Простая, настоящая еда без лишних слов</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">03</div>
+        <div class="value-title">Сила</div>
+        <p class="value-desc">Уверенный характер, знающий себе цену</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">04</div>
+        <div class="value-title">Душевность</div>
+        <p class="value-desc">Атмосфера дружеских посиделок</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- LOGO -->
+<section id="logo">
+  <div class="section">
+    <div class="section-label">02 / Логотип</div>
+    <h2>Гибкая<br>система<br>логотипа</h2>
+    <p>Шрифтовой логотип BEARLOGA выполнен в кастомном гротеске: буквы вырезаны из теста или дерева. Разработаны горизонтальная и вертикальная версии для адаптации под разные форматы.</p>
+  </div>
+
+  <div class="logo-grid" style="max-width:1400px; margin:0 auto;">
+    <div class="logo-card orange">
+      <span class="logo-card-label">Горизонтальная / Оранжевый</span>
+      <div class="logo-wordmark">BEARLOGA</div>
+    </div>
+    <div class="logo-card brown">
+      <span class="logo-card-label">Вертикальная / Тёмно-коричневый</span>
+      <div class="logo-wordmark">BEAR<br>LOGA</div>
+    </div>
+    <div class="logo-card cream">
+      <span class="logo-card-label">Горизонтальная / Кремовый</span>
+      <div class="logo-wordmark">BEARLOGA</div>
+    </div>
+    <div class="logo-card green">
+      <span class="logo-card-label">Вертикальная / Лесной зелёный</span>
+      <div class="logo-wordmark">BEAR<br>LOGA</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MASCOT -->
+<section class="mascot-section" id="mascot">
+  <div class="section">
+    <div class="section-label">03 / Маскот</div>
+    <h2>Медведь</h2>
+
+    <div class="mascot-showcase">
+      <div class="mascot-bear">🐻</div>
+      <div class="mascot-traits">
+        <p style="max-width:100%; color:#555; font-size:16px; margin-bottom:24px;">Медведь-маскот — дружелюбный, тёплый персонаж, который подчёркивает идею уюта, «логова» и душевной еды. Одновременно напоминает настоящего зверя и плюшевую игрушку — символ <strong>мягкой дикости</strong> и спокойной силы.</p>
+        <div class="trait">
+          <div class="trait-icon">🐾</div>
+          <div class="trait-text">
+            <strong>Добродушный, но с характером</strong>
+            <span>Не агрессивный, но уверенный в себе</span>
+          </div>
+        </div>
+        <div class="trait">
+          <div class="trait-icon">🧸</div>
+          <div class="trait-text">
+            <strong>Мягкая дикость</strong>
+            <span>Между настоящим зверем и плюшевой игрушкой</span>
+          </div>
+        </div>
+        <div class="trait">
+          <div class="trait-icon">🏠</div>
+          <div class="trait-text">
+            <strong>Тепло и притяжение</strong>
+            <span>Mascot = визуальный якорь тёплой берлоги</span>
+          </div>
+        </div>
+        <div class="trait">
+          <div class="trait-icon">📐</div>
+          <div class="trait-text">
+            <strong>Гибкий модуль</strong>
+            <span>Целиком или фрагментарно (только голова в аватаре)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COLORS -->
+<section id="colors">
+  <div class="section">
+    <div class="section-label">04 / Цветовая палитра</div>
+    <h2>6 цветов<br>берлоги</h2>
+    <p>Палитра вдохновлена природой и образом тёплого логова. Основные цвета отсылают к мху, дереву, костру и мягкому свету. Работает на контрастах: брутальный оливковый + уютный бежевый + акцентный оранжевый.</p>
+  </div>
+
+  <div class="colors-grid" style="max-width:1400px; margin:0 auto;">
+    <div>
+      <div class="color-swatch c-orange"></div>
+      <div class="color-info">
+        <div class="color-name">Жар костра</div>
+        <div class="color-sub">Главный акцент</div>
+        <span class="color-hex">#E8491E</span>
+        <span class="color-cmyk">RGB 232·73·30</span>
+      </div>
+    </div>
+    <div>
+      <div class="color-swatch c-cream"></div>
+      <div class="color-info">
+        <div class="color-name">Тёплый кремовый</div>
+        <div class="color-sub">Основной фон</div>
+        <span class="color-hex">#F2E4C0</span>
+        <span class="color-cmyk">RGB 242·228·192</span>
+      </div>
+    </div>
+    <div>
+      <div class="color-swatch c-brown"></div>
+      <div class="color-info">
+        <div class="color-name">Древесный</div>
+        <div class="color-sub">Премиальный фон</div>
+        <span class="color-hex">#2D0E06</span>
+        <span class="color-cmyk">RGB 45·14·6</span>
+      </div>
+    </div>
+    <div>
+      <div class="color-swatch c-green"></div>
+      <div class="color-info">
+        <div class="color-name">Лесной зелёный</div>
+        <div class="color-sub">Якорный цвет</div>
+        <span class="color-hex">#3A4B1B</span>
+        <span class="color-cmyk">RGB 58·75·27</span>
+      </div>
+    </div>
+    <div>
+      <div class="color-swatch c-coal"></div>
+      <div class="color-info">
+        <div class="color-name">Угольный след</div>
+        <div class="color-sub">Иллюстрации, текст</div>
+        <span class="color-hex">#1E1C1A</span>
+        <span class="color-cmyk">RGB 30·28·26</span>
+      </div>
+    </div>
+    <div>
+      <div class="color-swatch c-white"></div>
+      <div class="color-info">
+        <div class="color-name">Белый</div>
+        <div class="color-sub">Технический</div>
+        <span class="color-hex">#FFFFFF</span>
+        <span class="color-cmyk">RGB 255·255·255</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="combos" style="max-width:1400px; margin:2px auto 0;">
+    <div class="combo" style="background:var(--orange);">
+      <div class="combo-label" style="color:var(--cream); opacity:0.5;">Оранжевый + Кремовый</div>
+      <div class="combo-word" style="color:var(--cream);">Энергия</div>
+      <div class="combo-paw">🐾</div>
+    </div>
+    <div class="combo" style="background:var(--green);">
+      <div class="combo-label" style="color:var(--cream); opacity:0.5;">Зелёный + Кремовый</div>
+      <div class="combo-word" style="color:var(--cream);">Природа</div>
+      <div class="combo-paw" style="color:var(--cream);">🐾</div>
+    </div>
+    <div class="combo" style="background:var(--cream);">
+      <div class="combo-label" style="color:var(--coal); opacity:0.4;">Кремовый + Коричневый</div>
+      <div class="combo-word" style="color:var(--brown);">Уют</div>
+      <div class="combo-paw">🐾</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TYPOGRAPHY -->
+<section class="type-section" id="type">
+  <div class="section">
+    <div class="section-label">05 / Типографика</div>
+    <h2>Три<br>шрифта</h2>
+    <p>Шрифтовая система строится на трёх уровнях: заголовки кричат, текст говорит, акценты шепчут по-домашнему.</p>
+  </div>
+
+  <div class="type-showcase" style="max-width:1400px; margin:0 auto;">
+    <div class="type-row">
+      <div class="type-meta">
+        <span class="type-font-name">Firenight</span>
+        <span class="type-usage">Заголовки · All Caps · Bold</span>
+      </div>
+      <div class="type-sample-firenight">ГРОМКО.<br>ВКУСНО.<br>ПО-МЕДВЕЖЬИ</div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <span class="type-font-name">Golos Text</span>
+        <span class="type-usage">Основной текст · Regular–Bold</span>
+      </div>
+      <div class="type-sample-golos">
+        Добро пожаловать в берлогу!<br>
+        Здесь можно согреться вкусной едой,<br>
+        отдохнуть душой и почувствовать себя как дома.<br>
+        Всё, как у мишки: просто, вкусно<br>
+        и по-настоящему тепло.
+      </div>
+    </div>
+
+    <div class="type-row" style="background:var(--brown);">
+      <div class="type-meta">
+        <span class="type-font-name" style="color:var(--orange);">Swanky & Moo</span>
+        <span class="type-usage" style="color:rgba(242,228,192,0.5);">Акценты · Короткие фразы</span>
+      </div>
+      <div class="type-sample-swanky" style="color:var(--cream);">
+        Сделано с заботой,<br>съедено с удовольствием
+      </div>
+    </div>
+  </div>
+
+  <div class="type-scale" style="max-width:1400px; margin:2px auto 0;">
+    <div class="section-label" style="color:var(--orange); margin-bottom:32px;">Шкала размеров</div>
+    <div class="scale-row">
+      <span class="scale-label">H1 · 120pt</span>
+      <span style="font-size:clamp(48px,6vw,120px); font-weight:900; font-style:italic; text-transform:uppercase; letter-spacing:-3px; line-height:0.9;">БЕРЛОГА</span>
+    </div>
+    <div class="scale-row">
+      <span class="scale-label">H2 · 48pt</span>
+      <span style="font-size:clamp(28px,4vw,48px); font-weight:900; font-style:italic; text-transform:uppercase; letter-spacing:-2px;">ВКУСНО СЫТНО ГОРЯЧО</span>
+    </div>
+    <div class="scale-row">
+      <span class="scale-label">Body · 16pt</span>
+      <span style="font-size:16px; font-family:'Golos Text',sans-serif;">Описание блюда, посты, основной текст меню</span>
+    </div>
+    <div class="scale-row">
+      <span class="scale-label">Caption · 11pt</span>
+      <span style="font-size:11px; font-family:'Golos Text',sans-serif; color:#888;">Цены, адреса, мелкие подписи, контакты</span>
+    </div>
+    <div class="scale-row" style="border:none;">
+      <span class="scale-label">Accent · 28pt</span>
+      <span style="font-size:28px; font-family:'Swanky and Moo Moo',cursive; color:var(--brown);">У нас уютно, как всегда</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ILLUSTRATIONS -->
+<section class="illus-section" id="illus">
+  <div class="section">
+    <div class="section-label">06 / Иллюстрации</div>
+    <h2>Ручной<br>стиль</h2>
+    <p>Иллюстрации — сердце визуального языка Bearloga. Мягкая линия, как угольный карандаш. Округлые, массивные «медвежьи» формы. Простые, добрые люди, которые едят, смеются и радуются компании.</p>
+
+    <div class="illus-grid">
+      <div class="illus-card">
+        <div class="illus-icon">👥</div>
+        <div>
+          <div class="illus-title">Персонажи</div>
+          <p class="illus-desc">Простые добрые люди с медвежьими очертаниями — округлые фигуры, мохнатые локти. Всегда заняты едой и общением.</p>
+        </div>
+      </div>
+      <div class="illus-card">
+        <div class="illus-icon">🤲</div>
+        <div>
+          <div class="illus-title">Руки и еда</div>
+          <p class="illus-desc">Крупные «медвежьи лапы» держат бургер, лапшу, кофе, пиццу. Создают ощущение тепла и заботы.</p>
+        </div>
+      </div>
+      <div class="illus-card">
+        <div class="illus-icon">🍔</div>
+        <div>
+          <div class="illus-title">Иконки еды</div>
+          <p class="illus-desc">Бургер, стакан, пицца, миска, чашка, вилка — лаконичные контурные рисунки для меню и навигации.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PAW -->
+<section class="paw-section" id="paw">
+  <div class="section-full">
+    <div class="paw-content" style="max-width:1400px; margin:0 auto; padding:80px;">
+      <div>
+        <div class="section-label" style="color:var(--cream); opacity:0.6;">07 / Графический элемент</div>
+        <h2 style="color:var(--cream);">След</h2>
+        <p style="color:rgba(242,228,192,0.8); max-width:100%;">Отпечаток медвежьей лапы — ключевой графический элемент айдентики. Лаконичный визуальный жест, работающий как фирменная «подпись» бренда. Будто медведь здесь побывал и оставил след.</p>
+        <div class="paw-variants">
+          <div class="paw-chip">
+            <span class="paw-chip-icon">📦</span>
+            <span class="paw-chip-text">Упаковка</span>
+          </div>
+          <div class="paw-chip">
+            <span class="paw-chip-icon">📱</span>
+            <span class="paw-chip-text">Соцсети</span>
+          </div>
+          <div class="paw-chip">
+            <span class="paw-chip-icon">🗺️</span>
+            <span class="paw-chip-text">Навигация</span>
+          </div>
+          <div class="paw-chip">
+            <span class="paw-chip-icon">🎫</span>
+            <span class="paw-chip-text">Карта лояльности</span>
+          </div>
+        </div>
+      </div>
+      <div class="paw-hero">🐾</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- VOICE -->
+<section class="voice-section" id="voice">
+  <div class="section">
+    <div class="section-label">08 / Голос бренда</div>
+    <h2>Тон<br>коммуникации</h2>
+    <p>Bearloga говорит тепло, прямо и с юмором. Без пафоса, без сложных слов. Как хороший друг, который знает вкусные места.</p>
+
+    <div class="voice-traits">
+      <div class="voice-trait">
+        <div class="voice-icon">🔥</div>
+        <div class="voice-label">Тепло</div>
+        <div class="voice-desc">Всегда приветливо, никогда не холодно</div>
+      </div>
+      <div class="voice-trait">
+        <div class="voice-icon">💬</div>
+        <div class="voice-label">Прямота</div>
+        <div class="voice-desc">Говорим как есть, без лишних слов</div>
+      </div>
+      <div class="voice-trait">
+        <div class="voice-icon">😄</div>
+        <div class="voice-label">Юмор</div>
+        <div class="voice-desc">Лёгкий, без самоиронии в ущерб себе</div>
+      </div>
+      <div class="voice-trait">
+        <div class="voice-icon">✏️</div>
+        <div class="voice-label">Простота</div>
+        <div class="voice-desc">Короткие фразы, живой язык</div>
+      </div>
+      <div class="voice-trait">
+        <div class="voice-icon">🍕</div>
+        <div class="voice-label">Аппетитность</div>
+        <div class="voice-desc">Слова, от которых хочется есть сейчас</div>
+      </div>
+    </div>
+
+    <div class="slogans-grid" style="margin-top:48px;">
+      <div class="slogan-card">
+        <div class="slogan-type">Основной слоган</div>
+        <div class="slogan-text">По-домашнему,<br>но с характером</div>
+      </div>
+      <div class="slogan-card">
+        <div class="slogan-type">Постерный</div>
+        <div class="slogan-text">Громко.<br>Вкусно.<br>По-медвежьи</div>
+      </div>
+      <div class="slogan-card">
+        <div class="slogan-type">Упаковка / Акцент</div>
+        <div class="slogan-accent">Сделано с заботой,<br>съедено с удовольствием</div>
+      </div>
+      <div class="slogan-card">
+        <div class="slogan-type">Карта лояльности</div>
+        <div class="slogan-accent">Собирай лапы — получай вкусности</div>
+      </div>
+      <div class="slogan-card">
+        <div class="slogan-type">Соцсети</div>
+        <div class="slogan-accent">Здесь не только вкусно — ещё и наливают</div>
+      </div>
+      <div class="slogan-card">
+        <div class="slogan-type">Мерч</div>
+        <div class="slogan-accent">Я здесь, чтобы было вкусно</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- APPLICATIONS -->
+<section class="apps-section" id="apps">
+  <div class="section">
+    <div class="section-label">09 / Носители</div>
+    <h2>Применение</h2>
+    <p>Айдентика работает на всех носителях — от пиццы до футболки. Ниже показаны ключевые мокапы.</p>
+  </div>
+
+  <div class="apps-grid" style="max-width:1400px; margin:0 auto;">
+
+    <div class="app-card">
+      <div class="app-visual">
+        <div class="mock-pizza-box">
+          <div class="mock-bear">🐻</div>
+          <div class="mock-paw">🐾</div>
+          <div class="mock-logo">BEAR<br>LOGA</div>
+        </div>
+      </div>
+      <div class="app-info">
+        <div class="app-title">Коробка для пиццы</div>
+        <p class="app-desc">Оранжевый фон · Кремовый логотип вертикально · Иллюстрация персонажей · Лапа в углу</p>
+      </div>
+    </div>
+
+    <div class="app-card">
+      <div class="app-visual">
+        <div class="mock-bag">
+          <div class="mock-paw-top">🐾</div>
+          <div class="mock-illus">🤲</div>
+          <div class="mock-logo">BEAR<br>LOGA</div>
+        </div>
+      </div>
+      <div class="app-info">
+        <div class="app-title">Крафтовый пакет</div>
+        <p class="app-desc">Натуральный крафт · Белый или угольный логотип · Руки с едой · Лапа в углу</p>
+      </div>
+    </div>
+
+    <div class="app-card">
+      <div class="app-visual">
+        <div class="mock-tshirt">
+          <div class="mock-logo">BEAR<br>LOGA</div>
+          <div class="mock-illus">👫</div>
+          <div class="mock-caption">Я здесь, чтобы было вкусно</div>
+        </div>
+      </div>
+      <div class="app-info">
+        <div class="app-title">Мерч — футболка</div>
+        <p class="app-desc">Белая основа · Оранжевый логотип · Персонажи угольным · Фраза Swanky and Moo</p>
+      </div>
+    </div>
+
+    <div class="app-card">
+      <div class="app-visual">
+        <div class="mock-card">
+          <div class="mock-paw">🐾</div>
+          <div class="mock-logo">BEARLOGA</div>
+        </div>
+      </div>
+      <div class="app-info">
+        <div class="app-title">Визитная карточка</div>
+        <p class="app-desc">Лицо: оранжевый + персонажи · Оборот: белый + контакты Golos + иконки еды</p>
+      </div>
+    </div>
+
+    <div class="app-card">
+      <div class="app-visual">
+        <div class="mock-wrap">
+          <div class="wrap-pattern">
+            <div class="wrap-item bear">🐻</div>
+            <div class="wrap-item">BEAR<br>LOGA</div>
+            <div class="wrap-item bear">🐻</div>
+            <div class="wrap-item">BEAR<br>LOGA</div>
+            <div class="wrap-item">BEAR<br>LOGA</div>
+            <div class="wrap-item bear">🐻</div>
+            <div class="wrap-item">BEAR<br>LOGA</div>
+            <div class="wrap-item bear">🐻</div>
+            <div class="wrap-item bear">🐻</div>
+            <div class="wrap-item">BEAR<br>LOGA</div>
+            <div class="wrap-item bear">🐻</div>
+            <div class="wrap-item">BEAR<br>LOGA</div>
+          </div>
+          <span style="font-size:40px; position:relative;">📄</span>
+        </div>
+      </div>
+      <div class="app-info">
+        <div class="app-title">Упаковочная бумага</div>
+        <p class="app-desc">Белый фон · Угольный паттерн из маскота и вертикального логотипа · Монохром</p>
+      </div>
+    </div>
+
+    <div class="app-card">
+      <div class="app-visual">
+        <div class="mock-loyalty">
+          <div class="loyalty-title">Собирай лапы — получай вкусности</div>
+          <div class="paw-stamps">
+            <span class="paw-stamp">🐾</span>
+            <span class="paw-stamp">🐾</span>
+            <span class="paw-stamp">🐾</span>
+            <div class="empty-stamp"></div>
+            <div class="empty-stamp"></div>
+            <div class="empty-stamp"></div>
+          </div>
+          <span style="font-size:11px; color:#bbb;">3 из 6 лап собрано</span>
+        </div>
+      </div>
+      <div class="app-info">
+        <div class="app-title">Карта лояльности</div>
+        <p class="app-desc">Кремовый фон · 6 лап для сбора · Финальный бонус: 🍔 · Шрифт Swanky and Moo</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- RULES -->
+<section class="rules-section" id="rules">
+  <div class="section">
+    <div class="section-label">10 / Правила использования</div>
+    <h2>Можно<br>и нельзя</h2>
+  </div>
+
+  <div class="rules-grid" style="max-width:1400px; margin:0 auto;">
+    <div class="rules-card do">
+      <div class="rules-card-title">✓ Логотип — можно</div>
+      <div class="rule-item"><span class="rule-bullet">✓</span> Использовать на фонах из палитры бренда</div>
+      <div class="rule-item"><span class="rule-bullet">✓</span> Менять цвет логотипа согласно таблице сочетаний</div>
+      <div class="rule-item"><span class="rule-bullet">✓</span> Масштабировать с сохранением пропорций</div>
+      <div class="rule-item"><span class="rule-bullet">✓</span> Использовать обе версии (горизонтальная / вертикальная)</div>
+      <div class="rule-item"><span class="rule-bullet">✓</span> Применять монохромную версию на белом</div>
+    </div>
+    <div class="rules-card dont">
+      <div class="rules-card-title">✕ Логотип — нельзя</div>
+      <div class="rule-item"><span class="rule-bullet">✕</span> Искажать, растягивать, деформировать</div>
+      <div class="rule-item"><span class="rule-bullet">✕</span> Добавлять тени, градиенты, свечение</div>
+      <div class="rule-item"><span class="rule-bullet">✕</span> Помещать на пёстрые фото без подложки</div>
+      <div class="rule-item"><span class="rule-bullet">✕</span> Использовать цвета вне палитры</div>
+      <div class="rule-item"><span class="rule-bullet">✕</span> Уменьшать ниже 30 мм / 120 px</div>
+    </div>
+    <div class="rules-card do">
+      <div class="rules-card-title">✓ Типографика — можно</div>
+      <div class="rule-item"><span class="rule-bullet">✓</span> Firenight — только капслок для заголовков</div>
+      <div class="rule-item"><span class="rule-bullet">✓</span> Golos — основной текст в любом регистре</div>
+      <div class="rule-item"><span class="rule-bullet">✓</span> Swanky — одна короткая акцентная фраза</div>
+      <div class="rule-item"><span class="rule-bullet">✓</span> Использовать не более двух шрифтов на носитель</div>
+    </div>
+    <div class="rules-card dont">
+      <div class="rules-card-title">✕ Типографика — нельзя</div>
+      <div class="rule-item"><span class="rule-bullet">✕</span> Firenight в строчном регистре</div>
+      <div class="rule-item"><span class="rule-bullet">✕</span> Заменять системными шрифтами (Arial, Helvetica)</div>
+      <div class="rule-item"><span class="rule-bullet">✕</span> Swanky and Moo как основной текстовый шрифт</div>
+      <div class="rule-item"><span class="rule-bullet">✕</span> Смешивать больше двух шрифтов на носителе</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <span class="footer-logo">BEARLOGA</span>
+  <span class="footer-sub">по-домашнему, но с характером</span>
+  <span class="footer-meta">Бренд-бук v1.0 · 2025 · @bearloga_burgers</span>
+</footer>
+
+</body>
+</html>
