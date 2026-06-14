@@ -39,11 +39,10 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -60%);
-    font-size: 320px;
-    opacity: 0.12;
-    line-height: 1;
-    color: var(--brown);
+    transform: translate(-50%, -55%);
+    width: 420px;
+    opacity: 0.15;
+    filter: invert(1);
     user-select: none;
   }
   .cover-title {
@@ -175,6 +174,7 @@
     flex-direction: column;
     justify-content: space-between;
     min-height: 300px;
+    position: relative;
   }
   .logo-card-label {
     font-size: 11px;
@@ -851,7 +851,7 @@
 
 <!-- COVER -->
 <section class="cover" id="cover">
-  <div class="cover-bear">🐻</div>
+  <img class="cover-bear" src="assets/mascot.png" alt="Bearloga mascot">
   <div class="cover-title">BEAR<br>LOGA</div>
   <div class="cover-sub">Бренд-бук</div>
   <div class="cover-meta">Версия 1.0 · 2025 · Кропоткин</div>
@@ -901,21 +901,21 @@
   </div>
 
   <div class="logo-grid" style="max-width:1400px; margin:0 auto;">
-    <div class="logo-card orange">
-      <span class="logo-card-label">Горизонтальная / Оранжевый</span>
-      <div class="logo-wordmark">BEARLOGA</div>
+    <div class="logo-card orange" style="align-items:center; justify-content:center; gap:0;">
+      <span class="logo-card-label" style="position:absolute; top:24px; left:32px; opacity:0.5;">Горизонтальная / Оранжевый</span>
+      <img src="assets/logo-horizontal.png" alt="Bearloga horizontal logo" style="max-width:70%; filter:brightness(0) invert(1) sepia(1) saturate(0.5) hue-rotate(0deg) opacity(0.9); mix-blend-mode:normal; filter: brightness(10);">
     </div>
-    <div class="logo-card brown">
-      <span class="logo-card-label">Вертикальная / Тёмно-коричневый</span>
-      <div class="logo-wordmark">BEAR<br>LOGA</div>
+    <div class="logo-card brown" style="align-items:center; justify-content:center; gap:0; position:relative;">
+      <span class="logo-card-label" style="position:absolute; top:24px; left:32px; opacity:0.5;">Вертикальная / Тёмно-коричневый</span>
+      <img src="assets/logo-vertical.png" alt="Bearloga vertical logo" style="max-height:200px; filter:brightness(10);">
     </div>
-    <div class="logo-card cream">
-      <span class="logo-card-label">Горизонтальная / Кремовый</span>
-      <div class="logo-wordmark">BEARLOGA</div>
+    <div class="logo-card cream" style="align-items:center; justify-content:center; gap:0; position:relative;">
+      <span class="logo-card-label" style="position:absolute; top:24px; left:32px; opacity:0.4; color:var(--coal);">Горизонтальная / Кремовый</span>
+      <img src="assets/logo-horizontal.png" alt="Bearloga horizontal logo" style="max-width:70%; opacity:0.85;">
     </div>
-    <div class="logo-card green">
-      <span class="logo-card-label">Вертикальная / Лесной зелёный</span>
-      <div class="logo-wordmark">BEAR<br>LOGA</div>
+    <div class="logo-card green" style="align-items:center; justify-content:center; gap:0; position:relative;">
+      <span class="logo-card-label" style="position:absolute; top:24px; left:32px; opacity:0.5;">Вертикальная / Лесной зелёный</span>
+      <img src="assets/logo-vertical.png" alt="Bearloga vertical logo" style="max-height:200px; filter:brightness(10);">
     </div>
   </div>
 </section>
@@ -929,7 +929,7 @@
     <h2>Медведь</h2>
 
     <div class="mascot-showcase">
-      <div class="mascot-bear">🐻</div>
+      <div class="mascot-bear"><img src="assets/mascot.png" alt="Bearloga mascot" style="width:100%; max-width:400px;"></div>
       <div class="mascot-traits">
         <p style="max-width:100%; color:#555; font-size:16px; margin-bottom:24px;">Медведь-маскот — дружелюбный, тёплый персонаж, который подчёркивает идею уюта, «логова» и душевной еды. Одновременно напоминает настоящего зверя и плюшевую игрушку — символ <strong>мягкой дикости</strong> и спокойной силы.</p>
         <div class="trait">
