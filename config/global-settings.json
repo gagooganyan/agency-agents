@@ -1,0 +1,47 @@
+{
+    "$schema": "https://json.schemastore.org/claude-code-settings.json",
+    "hooks": {
+        "SessionStart": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "~/.claude/hooks/session-start.sh"
+                    }
+                ]
+            },
+            {
+                "matcher": "startup|clear|compact",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "CLAUDE_PLUGIN_ROOT=$HOME/.claude/plugins/superpowers $HOME/.claude/plugins/superpowers/hooks/run-hook.cmd session-start"
+                    }
+                ]
+            }
+        ],
+        "Stop": [
+            {
+                "matcher": "",
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "~/.claude/stop-hook-git-check.sh"
+                    }
+                ]
+            }
+        ]
+    },
+    "permissions": {
+        "allow": [
+            "Skill",
+            "Bash(*)",
+            "Read(*)",
+            "Write(*)",
+            "Edit(*)",
+            "Glob(*)",
+            "Grep(*)"
+        ],
+        "defaultMode": "bypassPermissions"
+    }
+}
