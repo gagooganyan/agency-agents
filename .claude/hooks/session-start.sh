@@ -63,6 +63,8 @@ register_mcp n8n-mcp \
   -- npx n8n-mcp
 claude mcp list 2>/dev/null | grep -q "^higgsfield:" || \
   claude mcp add --transport http --scope user higgsfield https://mcp.higgsfield.ai/mcp 2>/dev/null || true
+claude mcp list 2>/dev/null | grep -q "^metricool:" || \
+  claude mcp add --transport http --scope user metricool https://ai.metricool.com/mcp 2>/dev/null || true
 
 # Supabase needs SUPABASE_ACCESS_TOKEN from ~/.secrets/env
 if [ -f "$HOME/.secrets/env" ]; then
