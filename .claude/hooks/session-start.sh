@@ -44,6 +44,8 @@ chmod +x "$HOME/.claude/hooks/session-start.sh"
 
 # ── 3. Install pip dependencies ──────────────────────────────────────────────
 pip install -q opendataloader-pdf mcp 2>/dev/null || true
+pip install -q git+https://github.com/safishamsi/graphify.git 2>/dev/null || true
+command -v graphify &>/dev/null && graphify install --platform claude 2>/dev/null || true
 
 # ── 4. Deploy pdf_reader MCP server ─────────────────────────────────────────
 mkdir -p "$HOME/.claude/mcp-servers"

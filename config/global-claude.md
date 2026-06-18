@@ -54,3 +54,6 @@ Main project: /home/user/agency-agents (gagooganyan/agency-agents on GitHub)
 Dev branch: claude/superpowers-setup-NR5df
 VPS: 89.127.215.63 (Alien VPN bot — find SSH port before connecting)
 VPN bypass project: /home/user/alien-vpn-bypass/
+# graphify
+- **graphify** (`~/.claude/skills/graphify/SKILL.md`) - any input to knowledge graph. Trigger: `/graphify`
+When the user types `/graphify`, invoke the Skill tool with `skill: "graphify"` before doing anything else.
