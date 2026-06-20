@@ -58,11 +58,20 @@ register_mcp() {
   claude mcp add --scope user "$name" "$@" 2>/dev/null || true
 }
 
-register_mcp pdf-reader    -- python "$HOME/.claude/mcp-servers/pdf_reader.py"
-register_mcp playwright    -- npx @playwright/mcp@latest
+register_mcp pdf-reader      -- python "$HOME/.claude/mcp-servers/pdf_reader.py"
+register_mcp playwright      -- npx @playwright/mcp@latest
+register_mcp chrome-devtools -- npx chrome-devtools-mcp@latest
 register_mcp n8n-mcp \
   -e MCP_MODE=stdio -e LOG_LEVEL=error -e DISABLE_CONSOLE_OUTPUT=true \
   -- npx n8n-mcp
+
+# Glif (needs GLIF_API_TOKEN in ~/.secrets/env)
+if [ -n "${GLIF_API_TOKEN:-}" ]; then
+  claude mcp list 2>/dev/null | grep -q "^glif:" || \
+    claude mcp add --scope user glif \
+      -e GLIF_API_TOKEN="$GLIF_API_TOKEN" \
+      -- npx -y @glifxyz/glif-mcp-server@latest 2>/dev/null || true
+fi
 claude mcp list 2>/dev/null | grep -q "^higgsfield:" || \
   claude mcp add --transport http --scope user higgsfield https://mcp.higgsfield.ai/mcp 2>/dev/null || true
 claude mcp list 2>/dev/null | grep -q "^metricool:" || \
