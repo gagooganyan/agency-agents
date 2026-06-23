@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { LayoutDashboard, MessageSquare, Wallet, LogOut, CreditCard, Wifi, Phone, ShieldCheck } from 'lucide-react'
+import { LayoutDashboard, MessageSquare, Wallet, LogOut, CreditCard, Wifi, Phone, ShieldCheck, Package } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { createClient } from '@/lib/supabase/client'
 
@@ -13,6 +13,7 @@ const NAV = [
   { href: '/esim', icon: Wifi, label: 'eSIM' },
   { href: '/numbers', icon: Phone, label: 'Numbers' },
   { href: '/kyc', icon: ShieldCheck, label: 'KYC' },
+  { href: '/bundles', icon: Package, label: 'Privacy Packs' },
 ]
 
 export default function DashboardSidebar() {

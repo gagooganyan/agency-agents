@@ -7,6 +7,7 @@ const PRODUCTS = [
   { href: '/sms',     label: 'SMS Activations', desc: 'One-time verification codes' },
   { href: '/esim',    label: 'eSIM',            desc: 'Global mobile data' },
   { href: '/numbers', label: 'Virtual Numbers', desc: 'Rent local phone numbers' },
+  { href: '/bundles', label: 'Privacy Packs', desc: 'Card + number + eSIM bundle' },
 ]
 
 export default function DashboardPage() {
