@@ -76,6 +76,9 @@ export interface Card {
   last_four: string | null
   expiry_month: number | null
   expiry_year: number | null
+  is_disposable: boolean
+  merchant_domain: string | null
+  valid_until: string | null
   created_at: string
 }
 
@@ -117,4 +120,16 @@ export interface KycDocument {
   admin_note: string | null
   submitted_at: string
   reviewed_at: string | null
+}
+
+export interface BundlePurchase {
+  id: string
+  user_id: string
+  plan_id: 'privacy_pack'
+  price_cents: number
+  card_id: string | null
+  number_id: string | null
+  esim_id: string | null
+  status: 'active' | 'cancelled'
+  created_at: string
 }
