@@ -30,10 +30,14 @@ export async function POST(req: NextRequest) {
 
   const service = await createServiceClient()
   const { data: userRow } = await service.from('users').select('email').eq('id', user.id).single()
+  if (!userRow?.email) {
+    await creditBalance(user.id, plan.price_cents)
+    return NextResponse.json({ data: null, error: 'User record not found' } satisfies ApiResponse<never>, { status: 500 })
+  }
 
   try {
     // 1. Issue card
-    const cardholder = await createCardholder(user.id, userRow?.email ?? '')
+    const cardholder = await createCardholder(user.id, userRow.email)
     const walCard = await issueCard(cardholder.id, plan.includes.card_currency)
 
     const { data: card, error: cardErr } = await service.from('cards').insert({
@@ -74,16 +78,17 @@ export async function POST(req: NextRequest) {
 
     const order = await createAiraloOrder(esim_package_id)
     const sim = order.sims[0]
+    if (!sim) throw new Error('No SIM returned in Airalo order')
     const data_gb = parseDataGb(pkg.data)
 
     const { data: esim, error: esimErr } = await service.from('esims').insert({
       user_id: user.id,
       airalo_order_id: order.id,
-      iccid: sim?.iccid ?? null,
+      iccid: sim.iccid ?? null,
       country: esim_country,
       package_id: esim_package_id,
       data_gb,
-      qr_code: sim?.qrcode ?? null,
+      qr_code: sim.qrcode ?? null,
       status: 'active',
       expires_at: null,
       price_cents: pkg.price,
