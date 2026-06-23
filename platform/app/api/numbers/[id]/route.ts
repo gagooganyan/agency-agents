@@ -22,8 +22,13 @@ export async function DELETE(
 
   if (!vn) return NextResponse.json({ data: null, error: 'Not found' } satisfies ApiResponse<never>, { status: 404 })
 
+  const sid = vn.twilio_sid
+  if (typeof sid !== 'string' || !sid) {
+    return NextResponse.json({ data: null, error: 'Invalid record' }, { status: 500 })
+  }
+
   try {
-    await releaseNumber(vn.twilio_sid as string)
+    await releaseNumber(sid)
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Unknown error'
     return NextResponse.json({ data: null, error: message } satisfies ApiResponse<never>, { status: 500 })

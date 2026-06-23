@@ -26,7 +26,6 @@
     "sonner": "^2.0.7",
     "stripe": "^22.2.3",
     "tailwind-merge": "^3.6.0",
-    "twilio": "^6.0.2",
     "zustand": "^5.0.14"
   },
   "devDependencies": {

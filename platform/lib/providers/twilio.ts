@@ -10,6 +10,8 @@ export interface AvailableNumber {
   phoneNumber: string
   friendlyName: string
   isoCountry: string
+  locality: string | null
+  region: string | null
   monthlyFee: number
 }
 
@@ -17,6 +19,8 @@ interface TwilioAvailableNumber {
   phone_number: string
   friendly_name: string
   iso_country: string
+  locality?: string | null
+  region?: string | null
 }
 
 interface TwilioAvailableResponse {
@@ -28,9 +32,10 @@ interface TwilioPurchasedNumber {
   phone_number: string
 }
 
-export async function searchNumbers(isoCountry: string): Promise<AvailableNumber[]> {
+export async function searchNumbers(isoCountry: string, areaCode?: string): Promise<AvailableNumber[]> {
   const sid = process.env.TWILIO_ACCOUNT_SID!
-  const url = `${BASE}/Accounts/${sid}/AvailablePhoneNumbers/${isoCountry}/Local.json?SmsEnabled=true&Limit=20`
+  let url = `${BASE}/Accounts/${sid}/AvailablePhoneNumbers/${isoCountry}/Local.json?SmsEnabled=true&VoiceEnabled=true&Limit=20`
+  if (areaCode) url += `&AreaCode=${areaCode}`
   const res = await fetch(url, { headers: { Authorization: authHeader() } })
   if (!res.ok) throw new Error(`Twilio search failed: ${await res.text()}`)
   const json = await res.json() as TwilioAvailableResponse
@@ -38,7 +43,9 @@ export async function searchNumbers(isoCountry: string): Promise<AvailableNumber
     phoneNumber: n.phone_number,
     friendlyName: n.friendly_name,
     isoCountry,
-    monthlyFee: 100,
+    locality: n.locality ?? null,
+    region: n.region ?? null,
+    monthlyFee: 700,
   }))
 }
 

@@ -29,6 +29,7 @@ export function NumberList({ numbers }: { numbers: VirtualNumber[] }) {
   const [available, setAvailable] = useState<AvailableNumber[]>([])
   const [loading, setLoading] = useState(false)
   const [buying, setBuying] = useState<string | null>(null)
+  const [cancelling, setCancelling] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
 
@@ -48,23 +49,32 @@ export function NumberList({ numbers }: { numbers: VirtualNumber[] }) {
   async function buy(phoneNumber: string) {
     setBuying(phoneNumber)
     setError(null)
-    const res = await fetch('/api/numbers/buy', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ phone_number: phoneNumber, country }),
-    })
-    const json = await res.json() as { data: VirtualNumber | null; error: string | null }
-    setBuying(null)
-    if (json.error) { setError(json.error); return }
-    router.refresh()
+    try {
+      const res = await fetch('/api/numbers/buy', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone_number: phoneNumber, country }),
+      })
+      const json = await res.json() as { data: VirtualNumber | null; error: string | null }
+      if (json.error) { setError(json.error); return }
+      router.refresh()
+    } finally {
+      setBuying(null)
+    }
   }
 
   async function cancel(id: string) {
     if (!confirm('Cancel this number? This cannot be undone.')) return
-    const res = await fetch(`/api/numbers/${id}`, { method: 'DELETE' })
-    const json = await res.json() as { data: { ok: boolean } | null; error: string | null }
-    if (json.error) { setError(json.error); return }
-    router.refresh()
+    setCancelling(id)
+    setError(null)
+    try {
+      const res = await fetch(`/api/numbers/${id}`, { method: 'DELETE' })
+      const json = await res.json() as { data: { ok: boolean } | null; error: string | null }
+      if (json.error) { setError(json.error); return }
+      router.refresh()
+    } finally {
+      setCancelling(null)
+    }
   }
 
   return (
@@ -81,9 +91,10 @@ export function NumberList({ numbers }: { numbers: VirtualNumber[] }) {
                 </div>
                 <button
                   onClick={() => cancel(n.id)}
-                  className="text-red-400 text-sm hover:text-red-300 transition-colors"
+                  disabled={cancelling === n.id}
+                  className="text-red-400 text-sm hover:text-red-300 transition-colors disabled:opacity-50"
                 >
-                  Cancel
+                  {cancelling === n.id ? '...' : 'Cancel'}
                 </button>
               </div>
             ))}
@@ -93,7 +104,7 @@ export function NumberList({ numbers }: { numbers: VirtualNumber[] }) {
 
       <div>
         <h2 className="text-lg font-semibold text-white mb-3">Rent a Number</h2>
-        <p className="text-white/60 text-sm mb-4">$1.00/month · SMS-enabled local number</p>
+        <p className="text-white/60 text-sm mb-4">$7.00/month · SMS-enabled local number</p>
         <div className="flex gap-3 mb-4">
           <select
             value={country}
