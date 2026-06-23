@@ -62,7 +62,7 @@ alter table public.esims enable row level security;
 alter table public.virtual_numbers enable row level security;
 alter table public.kyc_documents enable row level security;
 
-create policy "cards_own" on public.cards for all using (auth.uid() = user_id);
-create policy "esims_own" on public.esims for all using (auth.uid() = user_id);
-create policy "virtual_numbers_own" on public.virtual_numbers for all using (auth.uid() = user_id);
-create policy "kyc_own" on public.kyc_documents for all using (auth.uid() = user_id);
+create policy "cards_own" on public.cards for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
+create policy "esims_own" on public.esims for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
+create policy "virtual_numbers_own" on public.virtual_numbers for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
+create policy "kyc_own" on public.kyc_documents for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
