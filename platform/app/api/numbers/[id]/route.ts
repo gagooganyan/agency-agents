@@ -34,7 +34,15 @@ export async function DELETE(
     return NextResponse.json({ data: null, error: message } satisfies ApiResponse<never>, { status: 500 })
   }
 
-  await service.from('virtual_numbers').update({ status: 'cancelled' }).eq('id', id).eq('user_id', user.id)
+  const { error: updateError } = await service
+    .from('virtual_numbers')
+    .update({ status: 'cancelled' })
+    .eq('id', id)
+    .eq('user_id', user.id)
+
+  if (updateError) {
+    return NextResponse.json({ data: null, error: 'Released from Twilio but failed to update record' } satisfies ApiResponse<never>, { status: 500 })
+  }
 
   return NextResponse.json({ data: { ok: true }, error: null } satisfies ApiResponse<{ ok: boolean }>)
 }

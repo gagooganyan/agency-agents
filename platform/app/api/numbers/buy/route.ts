@@ -4,7 +4,7 @@ import { purchaseNumber } from '@/lib/providers/twilio'
 import { debitBalance, creditBalance } from '@/lib/utils/balance'
 import { ApiResponse, VirtualNumber } from '@/types'
 
-const MONTHLY_PRICE_CENTS = 100
+const MONTHLY_PRICE_CENTS = 700
 
 export async function POST(req: NextRequest) {
   const supabase = await createClient()
