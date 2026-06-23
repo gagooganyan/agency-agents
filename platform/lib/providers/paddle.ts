@@ -1,3 +1,5 @@
+import crypto from 'crypto'
+
 // Paddle Billing API v1
 const PADDLE_API_BASE = 'https://api.paddle.com'
 
@@ -45,8 +47,6 @@ export function verifyPaddleWebhook(
   const ts = parts['ts']
   const h1 = parts['h1']
   const payload = `${ts}:${rawBody}`
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const crypto = require('crypto')
   const expected = crypto.createHmac('sha256', secret).update(payload).digest('hex')
   return expected === h1
 }

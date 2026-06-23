@@ -33,13 +33,21 @@ export async function POST(req: NextRequest) {
 
   if (!tx) return NextResponse.json({ received: true }) // already processed or not found
 
-  // Mark completed first, then credit
-  await service
+  // Mark completed first
+  const { error: updateErr } = await service
     .from('transactions')
     .update({ status: 'completed', external_id: event.data.id })
     .eq('id', tx.id)
 
-  await creditBalance(customData.user_id, tx.amount_cents)
+  if (updateErr) return NextResponse.json({ error: 'DB update failed' }, { status: 500 })
+
+  try {
+    await creditBalance(customData.user_id, tx.amount_cents)
+  } catch (err) {
+    // Revert so Paddle retries
+    await service.from('transactions').update({ status: 'pending' }).eq('id', tx.id)
+    return NextResponse.json({ error: 'Balance credit failed' }, { status: 500 })
+  }
 
   return NextResponse.json({ received: true })
 }
