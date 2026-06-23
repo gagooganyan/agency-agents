@@ -25,7 +25,7 @@ export async function POST() {
   for (const card of expired) {
     try {
       await setCardStatus(card.wallester_card_id, 'frozen')
-      await service.from('cards').update({ status: 'frozen' }).eq('id', card.id)
+      await service.from('cards').update({ status: 'frozen' }).eq('id', card.id).eq('user_id', user.id)
       frozen++
     } catch {
       // best-effort: log and continue

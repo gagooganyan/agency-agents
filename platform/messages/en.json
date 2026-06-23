@@ -23,7 +23,9 @@
     "login": "Sign in",
     "register": "Create account",
     "no_account": "Don't have an account?",
-    "have_account": "Already have an account?"
+    "have_account": "Already have an account?",
+    "subtitle": "Start with a free account",
+    "name": "Full name"
   },
   "dashboard": {
     "balance": "Balance",

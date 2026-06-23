@@ -39,11 +39,11 @@ export default function RegisterPage() {
   return (
     <div className="glass rounded-2xl p-8">
       <h1 className="text-2xl font-bold text-white mb-2">{t('register')}</h1>
-      <p className="text-muted-foreground text-sm mb-6">Start with a free account</p>
+      <p className="text-muted-foreground text-sm mb-6">{t('subtitle')}</p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <Label htmlFor="name" className="text-muted-foreground">Full name</Label>
+          <Label htmlFor="name" className="text-muted-foreground">{t('name')}</Label>
           <Input
             id="name"
             value={form.name}

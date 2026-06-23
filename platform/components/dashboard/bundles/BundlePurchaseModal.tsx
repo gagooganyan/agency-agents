@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { BundlePlan } from '@/lib/bundles'
 
@@ -51,6 +51,8 @@ export function BundlePurchaseModal({ plan, onClose }: Props) {
   const [loadingPkgs, setLoadingPkgs] = useState(false)
   const [purchasing, setPurchasing] = useState(false)
   const [error, setError] = useState('')
+
+  useEffect(() => { loadPackages(esimCountry) }, [])
 
   async function loadPackages(country: string) {
     setLoadingPkgs(true)
@@ -111,7 +113,6 @@ export function BundlePurchaseModal({ plan, onClose }: Props) {
           <select
             value={esimCountry}
             onChange={e => { setEsimCountry(e.target.value); loadPackages(e.target.value) }}
-            onFocus={() => { if (!packages.length) loadPackages(esimCountry) }}
             className="w-full mt-1 bg-white/10 text-white rounded-xl px-3 py-2 border border-white/20"
           >
             {ESIM_COUNTRIES.map(c => <option key={c.value} value={c.value}>{c.label}</option>)}
