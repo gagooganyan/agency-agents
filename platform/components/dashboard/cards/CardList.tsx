@@ -35,7 +35,16 @@ export function CardList({ cards, kycVerified }: { cards: Card[]; kycVerified: b
           {cards.map(card => (
             <a key={card.id} href={`/cards/${card.id}`} className="glass rounded-xl p-6 hover:bg-white/10 transition-colors">
               <div className="flex justify-between items-start mb-4">
-                <span className="text-white font-medium">{card.currency} Card</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-white font-medium">{card.currency} Card</span>
+                  {card.is_disposable && (
+                    <span className="text-xs bg-yellow-500/20 text-yellow-300 px-2 py-0.5 rounded-full">
+                      {card.valid_until && new Date(card.valid_until) > new Date()
+                        ? `Expires ${new Date(card.valid_until).toLocaleDateString()}`
+                        : 'Expired'}
+                    </span>
+                  )}
+                </div>
                 <span className={`text-xs px-2 py-1 rounded-full ${card.status === 'active' ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'}`}>
                   {card.status}
                 </span>

@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { CardList } from '@/components/dashboard/cards/CardList'
+import { DisposableAutoFreeze } from '@/components/dashboard/cards/DisposableAutoFreeze'
 
 export default async function CardsPage() {
   const supabase = await createClient()
@@ -12,6 +13,7 @@ export default async function CardsPage() {
 
   return (
     <div className="p-8">
+      <DisposableAutoFreeze />
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-white">Virtual Cards</h1>
         {profile?.kyc_status !== 'verified' && (

@@ -14,9 +14,18 @@ export async function POST(req: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) return NextResponse.json({ data: null, error: 'Unauthorized' } satisfies ApiResponse<never>, { status: 401 })
 
-  const { tariff } = await req.json()
+  const body = await req.json()
+  const { tariff } = body
   const tariffConfig = TARIFFS[tariff]
   if (!tariffConfig) return NextResponse.json({ data: null, error: 'Invalid tariff' } satisfies ApiResponse<never>, { status: 400 })
+
+  const is_disposable = body.is_disposable === true
+  const valid_days = is_disposable
+    ? Math.min(30, Math.max(1, Number(body.valid_days) || 7))
+    : null
+  const valid_until = is_disposable
+    ? new Date(Date.now() + valid_days! * 86400_000).toISOString()
+    : null
 
   const service = await createServiceClient()
 
@@ -50,6 +59,9 @@ export async function POST(req: NextRequest) {
         last_four: wallesterCard.masked_pan?.slice(-4) ?? null,
         expiry_month: wallesterCard.expiry_month,
         expiry_year: wallesterCard.expiry_year,
+        is_disposable,
+        merchant_domain: body.merchant_domain ?? null,
+        valid_until,
       })
       .select()
       .single()
