@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -9,6 +10,7 @@ import { createClient } from '@/lib/supabase/client'
 
 export default function RegisterPage() {
   const router = useRouter()
+  const t = useTranslations('auth')
   const [form, setForm] = useState({ name: '', email: '', password: '' })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -36,7 +38,7 @@ export default function RegisterPage() {
 
   return (
     <div className="glass rounded-2xl p-8">
-      <h1 className="text-2xl font-bold text-white mb-2">Create account</h1>
+      <h1 className="text-2xl font-bold text-white mb-2">{t('register')}</h1>
       <p className="text-muted-foreground text-sm mb-6">Start with a free account</p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -52,7 +54,7 @@ export default function RegisterPage() {
           />
         </div>
         <div>
-          <Label htmlFor="email" className="text-muted-foreground">Email</Label>
+          <Label htmlFor="email" className="text-muted-foreground">{t('email')}</Label>
           <Input
             id="email"
             type="email"
@@ -64,7 +66,7 @@ export default function RegisterPage() {
           />
         </div>
         <div>
-          <Label htmlFor="password" className="text-muted-foreground">Password</Label>
+          <Label htmlFor="password" className="text-muted-foreground">{t('password')}</Label>
           <Input
             id="password"
             type="password"
@@ -80,13 +82,13 @@ export default function RegisterPage() {
         {error && <p className="text-sm text-red-400">{error}</p>}
 
         <Button type="submit" className="w-full bg-violet-600 hover:bg-violet-700 h-11" disabled={loading}>
-          {loading ? 'Creating account...' : 'Create account'}
+          {loading ? '...' : t('register')}
         </Button>
       </form>
 
       <p className="text-center text-sm text-muted-foreground mt-6">
-        Already have an account?{' '}
-        <Link href="/login" className="text-violet-400 hover:text-violet-300">Sign in</Link>
+        {t('have_account')}{' '}
+        <Link href="/login" className="text-violet-400 hover:text-violet-300">{t('login')}</Link>
       </p>
     </div>
   )

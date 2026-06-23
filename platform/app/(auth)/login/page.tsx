@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -9,6 +10,7 @@ import { createClient } from '@/lib/supabase/client'
 
 export default function LoginPage() {
   const router = useRouter()
+  const t = useTranslations('auth')
   const [form, setForm] = useState({ email: '', password: '' })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -41,7 +43,7 @@ export default function LoginPage() {
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <Label htmlFor="email" className="text-muted-foreground">Email</Label>
+          <Label htmlFor="email" className="text-muted-foreground">{t('email')}</Label>
           <Input
             id="email"
             type="email"
@@ -53,7 +55,7 @@ export default function LoginPage() {
           />
         </div>
         <div>
-          <Label htmlFor="password" className="text-muted-foreground">Password</Label>
+          <Label htmlFor="password" className="text-muted-foreground">{t('password')}</Label>
           <Input
             id="password"
             type="password"
@@ -68,13 +70,13 @@ export default function LoginPage() {
         {error && <p className="text-sm text-red-400">{error}</p>}
 
         <Button type="submit" className="w-full bg-violet-600 hover:bg-violet-700 h-11" disabled={loading}>
-          {loading ? 'Signing in...' : 'Sign in'}
+          {loading ? '...' : t('login')}
         </Button>
       </form>
 
       <p className="text-center text-sm text-muted-foreground mt-6">
-        No account?{' '}
-        <Link href="/register" className="text-violet-400 hover:text-violet-300">Create one</Link>
+        {t('no_account')}{' '}
+        <Link href="/register" className="text-violet-400 hover:text-violet-300">{t('register')}</Link>
       </p>
     </div>
   )

@@ -1,0 +1,38 @@
+{
+  "nav": {
+    "home": "Главная",
+    "balance": "Баланс",
+    "sms": "SMS",
+    "cards": "Карты",
+    "esim": "eSIM",
+    "numbers": "Номера",
+    "kyc": "KYC",
+    "bundles": "Privacy Pack",
+    "admin": "Админ"
+  },
+  "landing": {
+    "headline": "Ваш финансовый инструментарий без границ",
+    "subheadline": "Виртуальные карты, номера и eSIM — без ограничений, без санкций.",
+    "cta": "Начать",
+    "signin": "Войти"
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Пароль",
+    "login": "Войти",
+    "register": "Создать аккаунт",
+    "no_account": "Нет аккаунта?",
+    "have_account": "Уже есть аккаунт?"
+  },
+  "dashboard": {
+    "balance": "Баланс",
+    "topup": "Пополнить",
+    "quick_links": "Продукты"
+  },
+  "common": {
+    "loading": "Загрузка…",
+    "error": "Что-то пошло не так",
+    "save": "Сохранить",
+    "cancel": "Отмена"
+  }
+}

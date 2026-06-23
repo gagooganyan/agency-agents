@@ -1,6 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
+import { useLocale } from 'next-intl'
 import { LayoutDashboard, MessageSquare, Wallet, LogOut, CreditCard, Wifi, Phone, ShieldCheck, Package } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { createClient } from '@/lib/supabase/client'
@@ -19,12 +20,20 @@ const NAV = [
 export default function DashboardSidebar() {
   const pathname = usePathname()
   const router = useRouter()
+  const locale = useLocale()
 
   async function signOut() {
     const supabase = createClient()
     await supabase.auth.signOut()
     router.push('/')
     router.refresh()
+  }
+
+  function switchLocale(newLocale: string) {
+    // Strip existing locale prefix then add new one if needed
+    const stripped = pathname.replace(/^\/(en|ru)/, '') || '/'
+    const newPath = newLocale === 'en' ? stripped : `/${newLocale}${stripped}`
+    router.push(newPath)
   }
 
   return (
@@ -59,6 +68,21 @@ export default function DashboardSidebar() {
         <LogOut size={18} />
         Sign out
       </button>
+
+      <div className="flex gap-2 px-3 pb-4 pt-2">
+        <button
+          onClick={() => switchLocale('en')}
+          className={`text-xs px-2 py-1 rounded ${locale === 'en' ? 'bg-white/20 text-white' : 'text-white/40 hover:text-white/60'}`}
+        >
+          EN
+        </button>
+        <button
+          onClick={() => switchLocale('ru')}
+          className={`text-xs px-2 py-1 rounded ${locale === 'ru' ? 'bg-white/20 text-white' : 'text-white/40 hover:text-white/60'}`}
+        >
+          RU
+        </button>
+      </div>
     </aside>
   )
 }
