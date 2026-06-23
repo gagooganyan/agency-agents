@@ -9,6 +9,9 @@ export async function POST(req: NextRequest) {
   if (!user) return NextResponse.json<ApiResponse<null>>({ data: null, error: 'Unauthorized' }, { status: 401 })
 
   const { amount_cents } = await req.json()
+  if (!Number.isInteger(amount_cents) || amount_cents <= 0) {
+    return NextResponse.json({ data: null, error: 'amount_cents must be a positive integer' } satisfies ApiResponse<never>, { status: 400 })
+  }
   if (!amount_cents || amount_cents < 500 || amount_cents > 100000) {
     return NextResponse.json<ApiResponse<null>>({ data: null, error: 'Amount must be between $5 and $1000' }, { status: 400 })
   }

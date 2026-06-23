@@ -8,7 +8,7 @@ export default async function CardsPage() {
   if (!user) redirect('/login')
 
   const { data: profile } = await supabase.from('users').select('kyc_status').eq('id', user.id).single()
-  const { data: cards } = await supabase.from('cards').select('*').order('created_at', { ascending: false })
+  const { data: cards } = await supabase.from('cards').select('*').eq('user_id', user.id).order('created_at', { ascending: false })
 
   return (
     <div className="p-8">

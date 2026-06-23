@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
   // Idempotency: only process pending transactions
   const { data: tx } = await service
     .from('transactions')
-    .select('id, status, amount_cents')
+    .select('id, status, amount_cents, user_id')
     .eq('id', customData.transaction_id)
     .eq('status', 'pending')
     .single()
@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
   if (updateErr) return NextResponse.json({ error: 'DB update failed' }, { status: 500 })
 
   try {
-    await creditBalance(customData.user_id, tx.amount_cents)
+    await creditBalance(tx.user_id, tx.amount_cents)
   } catch (err) {
     // Revert so Paddle retries
     await service.from('transactions').update({ status: 'pending' }).eq('id', tx.id)

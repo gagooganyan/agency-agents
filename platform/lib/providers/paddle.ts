@@ -47,6 +47,13 @@ export function verifyPaddleWebhook(
   const ts = parts['ts']
   const h1 = parts['h1']
   const payload = `${ts}:${rawBody}`
-  const expected = crypto.createHmac('sha256', secret).update(payload).digest('hex')
-  return expected === h1
+  const expectedHmac = crypto.createHmac('sha256', secret).update(payload).digest('hex')
+  const computedHmac = h1
+  const expectedBuf = Buffer.from(expectedHmac, 'hex')
+  const actualBuf = Buffer.from(computedHmac, 'hex')
+  if (expectedBuf.length !== actualBuf.length) return false
+  if (!crypto.timingSafeEqual(expectedBuf, actualBuf)) return false
+  const tsNum = parseInt(parts['ts'] ?? '0', 10)
+  if (Date.now() / 1000 - tsNum > 300) return false
+  return true
 }

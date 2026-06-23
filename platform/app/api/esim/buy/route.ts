@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient, createServiceClient } from '@/lib/supabase/server'
-import { getPackages, createAiraloOrder, parseDataGb } from '@/lib/providers/airalo'
+import { getPackages, createAiraloOrder, parseDataGb, AiraloPackage } from '@/lib/providers/airalo'
 import { debitBalance, creditBalance } from '@/lib/utils/balance'
 import { ApiResponse, Esim } from '@/types'
 
@@ -15,7 +15,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ data: null, error: 'package_id and country required' } satisfies ApiResponse<never>, { status: 400 })
   }
 
-  const packages = await getPackages(country)
+  let packages: AiraloPackage[]
+  try {
+    packages = await getPackages(country)
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'Failed to fetch packages'
+    return NextResponse.json({ data: null, error: message } satisfies ApiResponse<never>, { status: 502 })
+  }
   const pkg = packages.find(p => p.id === package_id)
   if (!pkg) return NextResponse.json({ data: null, error: 'Package not found' } satisfies ApiResponse<never>, { status: 404 })
 
