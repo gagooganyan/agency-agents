@@ -27,7 +27,7 @@ export default async function AdminKycPage() {
           <div key={doc.id} className="glass rounded-xl p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-white font-medium">{(doc as any).users?.email}</p>
+                <p className="text-white font-medium">{doc.users?.email}</p>
                 <p className="text-white/40 text-sm">{doc.document_type} · submitted {new Date(doc.submitted_at).toLocaleDateString()}</p>
               </div>
               <div className="flex gap-2">

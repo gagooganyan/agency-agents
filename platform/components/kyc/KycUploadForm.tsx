@@ -31,11 +31,16 @@ export function KycUploadForm() {
     if (back) fd.append('back', back)
     if (selfie) fd.append('selfie', selfie)
 
-    const res = await fetch('/api/kyc/submit', { method: 'POST', body: fd })
-    const json = await res.json()
-    setLoading(false)
-    if (json.error) { setError(json.error); return }
-    router.push('/dashboard?kyc=submitted')
+    try {
+      const res = await fetch('/api/kyc/submit', { method: 'POST', body: fd })
+      const json = await res.json()
+      if (json.error) { setError(json.error); return }
+      router.push('/dashboard?kyc=submitted')
+    } catch {
+      setError('Network error')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (

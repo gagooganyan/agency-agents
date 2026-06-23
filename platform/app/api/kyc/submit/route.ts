@@ -19,6 +19,11 @@ export async function POST(req: NextRequest) {
 
   const service = await createServiceClient()
 
+  const { data: existingProfile } = await service.from('users').select('kyc_status').eq('id', user.id).single()
+  if (existingProfile?.kyc_status === 'pending' || existingProfile?.kyc_status === 'verified') {
+    return NextResponse.json({ data: null, error: 'KYC already submitted or verified' } satisfies ApiResponse<never>, { status: 400 })
+  }
+
   async function uploadFile(file: File, name: string): Promise<string> {
     const bytes = await file.arrayBuffer()
     const path = `${user!.id}/${name}-${Date.now()}.${file.name.split('.').pop()}`
@@ -30,9 +35,18 @@ export async function POST(req: NextRequest) {
     return path
   }
 
-  const frontPath = await uploadFile(frontFile, 'front')
-  const backPath = backFile ? await uploadFile(backFile, 'back') : null
-  const selfiePath = selfieFile ? await uploadFile(selfieFile, 'selfie') : null
+  let frontPath: string
+  let backPath: string | null = null
+  let selfiePath: string | null = null
+
+  try {
+    frontPath = await uploadFile(frontFile, 'front')
+    if (backFile) backPath = await uploadFile(backFile, 'back')
+    if (selfieFile) selfiePath = await uploadFile(selfieFile, 'selfie')
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : 'Upload failed'
+    return NextResponse.json({ data: null, error: msg } satisfies ApiResponse<never>, { status: 500 })
+  }
 
   const { data: doc, error } = await service
     .from('kyc_documents')
