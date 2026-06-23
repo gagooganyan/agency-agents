@@ -11,6 +11,10 @@ const AUTH_PAGES = ['/login', '/register']
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname
 
+  // Detect current locale from path prefix
+  const localeMatch = path.match(/^\/(en|ru)/)
+  const locale = localeMatch ? localeMatch[1] : 'en'
+
   // Strip locale prefix before checking auth routes
   const strippedPath = path.replace(/^\/(en|ru)/, '') || '/'
 
@@ -38,11 +42,22 @@ export async function middleware(request: NextRequest) {
     const { data: { user } } = await supabase.auth.getUser()
 
     if (isProtected && !user) {
-      return NextResponse.redirect(new URL('/login', request.url))
+      const loginPath = locale === 'en' ? '/login' : `/${locale}/login`
+      const redirect = NextResponse.redirect(new URL(loginPath, request.url))
+      supabaseResponse.cookies.getAll().forEach(c => redirect.cookies.set(c.name, c.value))
+      return redirect
     }
     if (isAuthPage && user) {
-      return NextResponse.redirect(new URL('/dashboard', request.url))
+      const dashPath = locale === 'en' ? '/dashboard' : `/${locale}/dashboard`
+      const redirect = NextResponse.redirect(new URL(dashPath, request.url))
+      supabaseResponse.cookies.getAll().forEach(c => redirect.cookies.set(c.name, c.value))
+      return redirect
     }
+
+    // Merge supabase session cookies into the intl response so cookie rotation is preserved
+    const intlResponse = intlMiddleware(request)
+    supabaseResponse.cookies.getAll().forEach(c => intlResponse.cookies.set(c.name, c.value))
+    return intlResponse
   }
 
   return intlMiddleware(request)

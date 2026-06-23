@@ -1,26 +1,27 @@
 'use client'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { LayoutDashboard, MessageSquare, Wallet, LogOut, CreditCard, Wifi, Phone, ShieldCheck, Package } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { createClient } from '@/lib/supabase/client'
 
-const NAV = [
-  { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
-  { href: '/balance', icon: Wallet, label: 'Balance' },
-  { href: '/sms', icon: MessageSquare, label: 'SMS Activations' },
-  { href: '/cards', icon: CreditCard, label: 'Cards' },
-  { href: '/esim', icon: Wifi, label: 'eSIM' },
-  { href: '/numbers', icon: Phone, label: 'Numbers' },
-  { href: '/kyc', icon: ShieldCheck, label: 'KYC' },
-  { href: '/bundles', icon: Package, label: 'Privacy Packs' },
+const NAV_ITEMS = [
+  { href: '/dashboard', icon: LayoutDashboard, key: 'home' as const },
+  { href: '/balance', icon: Wallet, key: 'balance' as const },
+  { href: '/sms', icon: MessageSquare, key: 'sms' as const },
+  { href: '/cards', icon: CreditCard, key: 'cards' as const },
+  { href: '/esim', icon: Wifi, key: 'esim' as const },
+  { href: '/numbers', icon: Phone, key: 'numbers' as const },
+  { href: '/kyc', icon: ShieldCheck, key: 'kyc' as const },
+  { href: '/bundles', icon: Package, key: 'bundles' as const },
 ]
 
 export default function DashboardSidebar() {
   const pathname = usePathname()
   const router = useRouter()
   const locale = useLocale()
+  const t = useTranslations('nav')
 
   async function signOut() {
     const supabase = createClient()
@@ -44,7 +45,7 @@ export default function DashboardSidebar() {
       </Link>
 
       <nav className="flex-1 space-y-1">
-        {NAV.map(({ href, icon: Icon, label }) => (
+        {NAV_ITEMS.map(({ href, icon: Icon, key }) => (
           <Link
             key={href}
             href={href}
@@ -56,7 +57,7 @@ export default function DashboardSidebar() {
             )}
           >
             <Icon size={18} />
-            {label}
+            {t(key)}
           </Link>
         ))}
       </nav>
