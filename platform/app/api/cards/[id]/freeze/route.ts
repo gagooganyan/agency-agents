@@ -22,7 +22,13 @@ export async function POST(
   if (!card) return NextResponse.json({ data: null, error: 'Not found' } satisfies ApiResponse<never>, { status: 404 })
 
   const newStatus = action === 'freeze' ? 'frozen' : 'active'
-  await setCardStatus(card.wallester_card_id, newStatus)
+
+  try {
+    await setCardStatus(card.wallester_card_id, newStatus === 'frozen' ? 'frozen' : 'active')
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : 'Wallester error'
+    return NextResponse.json({ data: null, error: msg } satisfies ApiResponse<never>, { status: 502 })
+  }
 
   const { data: updated } = await service
     .from('cards')

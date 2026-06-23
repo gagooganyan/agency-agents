@@ -10,6 +10,7 @@ export async function GET(_req: NextRequest) {
   const { data, error } = await supabase
     .from('cards')
     .select('*')
+    .eq('user_id', user.id)
     .order('created_at', { ascending: false })
 
   if (error) return NextResponse.json({ data: null, error: error.message } satisfies ApiResponse<never>, { status: 500 })

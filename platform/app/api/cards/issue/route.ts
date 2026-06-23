@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
       user_id: user.id,
       type: 'purchase',
       amount_cents: tariffConfig.price_cents,
-      currency: 'USD',
+      currency: tariffConfig.currency,
       status: 'completed',
       provider: 'wallester',
       product_type: 'card',

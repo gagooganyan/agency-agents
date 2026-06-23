@@ -8,7 +8,7 @@ export default async function CardDetailPage({ params }: { params: Promise<{ id:
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/login')
 
-  const { data: card } = await supabase.from('cards').select('*').eq('id', id).single()
+  const { data: card } = await supabase.from('cards').select('*').eq('id', id).eq('user_id', user.id).single()
   if (!card) notFound()
 
   return (
