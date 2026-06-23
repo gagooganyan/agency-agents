@@ -1,14 +1,18 @@
 'use client'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { LayoutDashboard, MessageSquare, Wallet, LogOut } from 'lucide-react'
+import { LayoutDashboard, MessageSquare, Wallet, LogOut, CreditCard, Wifi, Phone, ShieldCheck } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { createClient } from '@/lib/supabase/client'
 
 const NAV = [
   { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
-  { href: '/dashboard/balance', icon: Wallet, label: 'Balance' },
-  { href: '/dashboard/sms', icon: MessageSquare, label: 'SMS Activations' },
+  { href: '/balance', icon: Wallet, label: 'Balance' },
+  { href: '/sms', icon: MessageSquare, label: 'SMS Activations' },
+  { href: '/cards', icon: CreditCard, label: 'Cards' },
+  { href: '/esim', icon: Wifi, label: 'eSIM' },
+  { href: '/numbers', icon: Phone, label: 'Numbers' },
+  { href: '/kyc', icon: ShieldCheck, label: 'KYC' },
 ]
 
 export default function DashboardSidebar() {
