@@ -67,7 +67,7 @@ export default function DashboardSidebar() {
         className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-muted-foreground hover:text-white hover:bg-white/5 transition-colors w-full"
       >
         <LogOut size={18} />
-        Sign out
+        {t('signout')}
       </button>
 
       <div className="flex gap-2 px-3 pb-4 pt-2">

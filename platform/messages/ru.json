@@ -8,7 +8,8 @@
     "numbers": "Номера",
     "kyc": "KYC",
     "bundles": "Privacy Pack",
-    "admin": "Админ"
+    "admin": "Админ",
+    "signout": "Выйти"
   },
   "landing": {
     "headline": "Ваш финансовый инструментарий без границ",

@@ -8,7 +8,8 @@
     "numbers": "Numbers",
     "kyc": "KYC",
     "bundles": "Privacy Packs",
-    "admin": "Admin"
+    "admin": "Admin",
+    "signout": "Sign out"
   },
   "landing": {
     "headline": "Your global financial toolkit",
