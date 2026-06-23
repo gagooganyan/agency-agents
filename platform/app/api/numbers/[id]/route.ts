@@ -24,7 +24,7 @@ export async function DELETE(
 
   const sid = vn.twilio_sid
   if (typeof sid !== 'string' || !sid) {
-    return NextResponse.json({ data: null, error: 'Invalid record' }, { status: 500 })
+    return NextResponse.json({ data: null, error: 'Invalid record' } satisfies ApiResponse<never>, { status: 500 })
   }
 
   try {
