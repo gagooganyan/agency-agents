@@ -14,19 +14,6 @@ Full bypass mode active. Never ask for permission to install packages, edit file
 - Short status updates only when direction changes or something fails
 - End of turn: one sentence max summarizing what changed, if anything
 
-## Writing Rules (always active — stop-slop)
-- No adverbs
-- Active voice only — every sentence needs a human subject
-- No passive constructions, no inanimate objects performing human actions
-- Be specific — no vague declaratives ("The reasons are structural")
-- No filler openers: "Here's the thing", "Let that sink in", "The truth is", "At the end of the day"
-- No binary contrasts ("not X, it's Y") — state Y directly
-- No em dashes
-- No rhetorical questions as section openers
-- Mix sentence lengths — two items beat three
-- No pull-quote sentences — if it sounds quotable, rewrite it
-- Trust the reader — no softening, no hand-holding
-
 ## Tools to Use Automatically
 - `caveman` skill for any task where speed > explanation
 - `brainstorming` skill before any new feature/project
