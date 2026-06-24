@@ -80,6 +80,14 @@ if [ -n "${SUPABASE_ACCESS_TOKEN:-}" ]; then
     --access-token "$SUPABASE_ACCESS_TOKEN"
 fi
 
+# 21st.dev Magic MCP — UI component library (needs MAGIC_API_KEY from ~/.secrets/env)
+if [ -n "${MAGIC_API_KEY:-}" ]; then
+  claude mcp list 2>/dev/null | grep -q "^21st-dev:" || \
+    claude mcp add --scope user 21st-dev \
+      -e MAGIC_API_KEY="$MAGIC_API_KEY" \
+      -- npx @21st-dev/magic@latest 2>/dev/null || true
+fi
+
 echo "MCP servers registered"
 
 # ── 6. Install custom skills from repo/skills/ ──────────────────────────────
