@@ -100,16 +100,6 @@ touch "$HOME/.secrets/env"
 chmod 600 "$HOME/.secrets/env"
 
 # ── 8. Plugins: install + enable ─────────────────────────────────────────────
-# ruflo (multi-agent swarm)
-claude plugin marketplace list 2>/dev/null | grep -q "ruflo" || \
-  claude plugin marketplace add ruvnet/ruflo 2>/dev/null || true
-
-for p in ruflo-core ruflo-swarm ruflo-autopilot ruflo-federation; do
-  claude plugin list 2>/dev/null | grep -q "^  > ${p}" || \
-    claude plugin install "${p}@ruflo" 2>/dev/null || true
-  claude plugin enable "${p}@ruflo" 2>/dev/null || true
-done
-
 # ui-ux-pro-max
 claude plugin list 2>/dev/null | grep -q "ui-ux-pro-max" || {
   claude plugin marketplace add nextlevelbuilder/ui-ux-pro-max-skill 2>/dev/null || true
