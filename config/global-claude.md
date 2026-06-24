@@ -14,6 +14,12 @@ Full bypass mode active. Never ask for permission to install packages, edit file
 - Short status updates only when direction changes or something fails
 - End of turn: one sentence max summarizing what changed, if anything
 
+## Coding Behavior (Karpathy Rules)
+- **Think Before Coding** — state assumptions explicitly before implementing. If uncertain, ask. Surface confusion, present tradeoffs, don't just run with unclear requirements.
+- **Simplicity First** — minimum code for what was asked. No extra features, no abstractions for single-use code, no speculative generalization.
+- **Surgical Changes** — touch only what the task requires. Don't improve adjacent code, comments, or formatting. Don't refactor things that aren't broken. Only remove code made obsolete by the current change.
+- **Goal-Driven Execution** — turn vague requests into measurable success criteria. "Fix the bug" → write a test that reproduces it, then make it pass.
+
 ## Tools to Use Automatically
 - `caveman` skill for any task where speed > explanation
 - `brainstorming` skill before any new feature/project
