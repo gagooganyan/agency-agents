@@ -42,6 +42,12 @@ Credentials live in `~/.secrets/`. Never hardcode keys. Load with:
 source ~/.secrets/env
 ```
 
+## Legal Context
+Jurisdiction: Russia
+Document types: court filings, contracts, claims, statements of claim, court decisions
+Language: Russian documents, analysis in Russian
+Agent to use: Legal Document Review
+
 ## Project Context
 Main project: /home/user/agency-agents (gagooganyan/agency-agents on GitHub)
 Dev branch: claude/superpowers-setup-NR5df
