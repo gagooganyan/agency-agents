@@ -1,6 +1,11 @@
 name: VPN Server Check
 on:
   workflow_dispatch:
+    inputs:
+      vps_password:
+        description: 'VPS root password'
+        required: true
+        type: string
 
 jobs:
   check:
@@ -11,16 +16,13 @@ jobs:
         with:
           host: 213.239.157.6
           username: root
-          password: ${{ secrets.VPS_PASSWORD }}
+          password: ${{ inputs.vps_password }}
           script: |
             echo "=== VPN CONFIG ==="
             cat /root/vpn_config.txt 2>/dev/null || echo "File not found"
-            echo ""
             echo "=== 3x-ui STATUS ==="
-            systemctl is-active x-ui 2>/dev/null || echo "x-ui not running"
-            echo ""
-            echo "=== OPEN PORTS ==="
-            ss -tlnp | grep -E "443|54321|2096"
-            echo ""
-            echo "=== CERT STATUS ==="
-            ls /etc/letsencrypt/live/ 2>/dev/null || echo "No certs"
+            systemctl is-active x-ui 2>/dev/null || echo "not running"
+            echo "=== PORTS ==="
+            ss -tlnp 2>/dev/null | grep -E ":443|:54321|:2096" || echo "none"
+            echo "=== CERT ==="
+            ls /etc/letsencrypt/live/ 2>/dev/null || echo "no certs"
