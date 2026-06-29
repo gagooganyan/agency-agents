@@ -99,27 +99,6 @@ mkdir -p "$HOME/.secrets"
 touch "$HOME/.secrets/env"
 chmod 600 "$HOME/.secrets/env"
 
-# ── 8. Plugins: install + enable ─────────────────────────────────────────────
-# ui-ux-pro-max
-claude plugin list 2>/dev/null | grep -q "ui-ux-pro-max" || {
-  claude plugin marketplace add nextlevelbuilder/ui-ux-pro-max-skill 2>/dev/null || true
-  claude plugin install ui-ux-pro-max@ui-ux-pro-max-skill 2>/dev/null || true
-}
-claude plugin enable "ui-ux-pro-max@ui-ux-pro-max-skill" 2>/dev/null || true
-
-# claude-for-legal
-claude plugin marketplace list 2>/dev/null | grep -q "claude-for-legal" || \
-  claude plugin marketplace add anthropics/claude-for-legal 2>/dev/null || true
-
-for p in commercial-legal corporate-legal privacy-legal product-legal \
-          employment-legal ip-legal ai-governance-legal litigation-legal \
-          regulatory-legal; do
-  claude plugin list 2>/dev/null | grep -q "^  > ${p}" || \
-    claude plugin install "${p}@claude-for-legal" 2>/dev/null || true
-  claude plugin enable "${p}@claude-for-legal" 2>/dev/null || true
-done
-echo "Plugins ready"
-
 # ── 9. Install agency-agents ─────────────────────────────────────────────────
 chmod +x "$REPO_DIR/scripts/"*.sh
 cd "$REPO_DIR"
