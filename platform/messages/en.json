@@ -1,0 +1,41 @@
+{
+  "nav": {
+    "home": "Dashboard",
+    "balance": "Balance",
+    "sms": "SMS",
+    "cards": "Cards",
+    "esim": "eSIM",
+    "numbers": "Numbers",
+    "kyc": "KYC",
+    "bundles": "Privacy Packs",
+    "admin": "Admin",
+    "signout": "Sign out"
+  },
+  "landing": {
+    "headline": "Your global financial toolkit",
+    "subheadline": "Virtual cards, numbers, and eSIMs — no borders, no limits.",
+    "cta": "Get started",
+    "signin": "Sign in"
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "login": "Sign in",
+    "register": "Create account",
+    "no_account": "Don't have an account?",
+    "have_account": "Already have an account?",
+    "subtitle": "Start with a free account",
+    "name": "Full name"
+  },
+  "dashboard": {
+    "balance": "Balance",
+    "topup": "Top up",
+    "quick_links": "Products"
+  },
+  "common": {
+    "loading": "Loading…",
+    "error": "Something went wrong",
+    "save": "Save",
+    "cancel": "Cancel"
+  }
+}
